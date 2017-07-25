@@ -18,6 +18,12 @@ Vue.use(VueAwesomeSwiper)
 Vue.prototype.$ajax = axios;
 //拥入weui样式库
 import "weui"
+
+//引入样式-------------------
+
+import './css/reset.css';
+import './css/home.css';
+//-------------------
 //引入组件
 import home from "./components/routes/home.vue";
 import detail from "./components/routes/detail.vue";
