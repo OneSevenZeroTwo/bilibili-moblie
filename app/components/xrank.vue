@@ -30,7 +30,7 @@
 				<div class="index__leftMark__src-ranking-board-item-" v-else>
 					<p>{{index}}</p>
 				</div>
-				<xcontentheader :imgurl="n.pic|webp"></xcontentheader>
+				<xcontentheader :imgurl="images[index]"></xcontentheader>
 				<div class="index__desc__src-ranking-board-item-">
 					<div class="index__title__src-ranking-board-item-">
 						<p>{{n.title}}</p>
@@ -78,6 +78,11 @@
 			},
 			Img(){
 				return this.$store.state.Img
+			},
+			images(){
+				console.log(this)
+				console.log(this.$store.state.Ranks)
+				return this.$store.state.images
 			}
 		},
 		methods: {
