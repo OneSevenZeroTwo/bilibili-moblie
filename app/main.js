@@ -58,7 +58,8 @@ var store = new Vuex.Store({
 		news: null,
 		imgUrl: null,
 		isShowGallery: false,
-		direction: "left"
+		direction: "left",
+		Img: ["//s1.hdslb.com/bfs/static/mult/images/rank1.png", "//s1.hdslb.com/bfs/static/mult/images/rank2.png", "//s1.hdslb.com/bfs/static/mult/images/rank3.png"]
 	},
 	getters: {
 		getCount(state) {

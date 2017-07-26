@@ -1,18 +1,18 @@
 <template>
 	<div>
 		<xheader></xheader>
-		<xswiper></xswiper>
+		<xdaohang></xdaohang>
 		<xrank></xrank>
 	</div>
 </template>
 <script>
 	import xheader from "../xheader.vue";
-		import xswiper from "../xswiper.vue";
+		import xdaohang from "../xdaohang.vue";
 	import xrank from "../xrank.vue";
 	export default {
 		components: {
 			xheader,
-			xswiper,
+			xdaohang,
 			xrank
 		}
 	}
