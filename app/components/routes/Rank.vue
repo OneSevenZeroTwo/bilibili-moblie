@@ -1,18 +1,19 @@
 <template>
 	<div>
 		<xheader></xheader>
-		<xdaohang></xdaohang>
-		<xrank></xrank>
+		<xnav></xnav>
+		<xrank channel="1"></xrank>
 	</div>
 </template>
 <script>
+	
 	import xheader from "../xheader.vue";
-		import xdaohang from "../xdaohang.vue";
+		import xnav from "../xnav.vue";
 	import xrank from "../xrank.vue";
 	export default {
 		components: {
 			xheader,
-			xdaohang,
+			xnav,
 			xrank
 		}
 	}
