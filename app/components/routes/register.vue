@@ -287,7 +287,8 @@
 			},		
 			ajax:function(){
 				var self = this;
-				this.$ajax.post('http://localhost:666/register',{
+				// this.$ajax.post('http://localhost:666/register',{
+				this.$ajax.post('http://10.3.137.214:666/register',{
 						uname:this.uname,
 						password:this.password
 					},{

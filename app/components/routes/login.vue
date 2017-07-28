@@ -221,7 +221,8 @@
 			},
 			ajax:function(){
 				var self = this;
-				this.$ajax.post('http://localhost:666/login',{
+				// this.$ajax.post('http://localhost:666/login',{
+				this.$ajax.post('http://10.3.137.214:666/login',{
 						uname:this.uname,
 						password:this.password
 					},{
