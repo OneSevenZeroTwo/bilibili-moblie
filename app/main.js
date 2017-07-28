@@ -48,7 +48,17 @@ var router = new VueRouter({
 			redirect: '/index'
 		},{
 			path:'/mine',
-			component:mine
+			component:mine,
+			/*children:[{
+				path:'fav',
+				component:
+			},{
+				path:'userPost',
+				component:
+			},{
+				path:'history',
+				component:
+			}]*/
 		},{
 			path:'/login',
 			component:login

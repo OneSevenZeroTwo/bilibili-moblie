@@ -90,6 +90,7 @@ app.post('/collect', function(req, res) {
 		if(error) throw error;
 		console.log(results[0].msgId);
 		var str = results[0].msgId;
+		console.log(str);
 		if(str.length>=1){
 			str += ','+msgId;
 		}else{

@@ -314,11 +314,8 @@
 							// 设置延时跳转
 							setTimeout(function(){
 								location.href = '#/index';
-							},1000)
-							
+							},1000)				
 						}
-						
-
 				})
 			}
 		}

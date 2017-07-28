@@ -24,22 +24,29 @@
 		<div class="user-wrapper">
 			<div class="user-avatar"><img src="//static.hdslb.com/mobile/img/default_avatar.png" alt="默认头像"></div>
 			<div class="user-info">
-				<p class="user-name">游客</p>
+				<p class="user-name">{{uname?uname:'游客'}}</p>
 				<p class="user-coin">硬币：－</p>
 			</div>
 		</div>
 		<div class="act-wrapper">
 			<ul>
+				<li v-show="userShow"><a class="act-item act-item-fav" href="#/fav"><i class="bili-icon-fav"></i><span class="act-name">我的收藏</span><i class="bili-icon-arrow"></i></a>
+				</li>
+				<li v-show="userShow"><a class="act-item" href="#/myPost"><i class="bili-icon-upload"></i><span class="act-name">我的投稿</span><i class="bili-icon-arrow"></i></a></li>
 				<li>
-					<a class="act-item" href="/history.html"><i class="bili-icon-history-2"></i><span class="act-name">历史记录</span><i class="bili-icon-arrow"></i></a>
+					<a class="act-item" href="#/history"><i class="bili-icon-history-2"></i><span class="act-name">历史记录</span><i class="bili-icon-arrow"></i></a>
 				</li>
 			</ul>
-			<p class="act-tooltip">登陆后可以同步播放记录哦～</p>
+			<p v-show="!userShow" class="act-tooltip">登陆后可以同步播放记录哦～</p>
 		</div>
 		<div class="account-wrapper">
-			<a href="https://account.bilibili.com/login" class="account-login account-btn">登&nbsp;&nbsp;录</a>
-			<a href="https://account.bilibili.com/register/phone" class="account-register account-btn">注&nbsp;&nbsp;册</a>
-			<p class="reg-tooltip">据说用客户端注册可以减少答题哟～</p>
+			<div v-show="!userShow">
+				<a href="#/login" class="account-login account-btn">登&nbsp;&nbsp;录</a>
+				<a href="#/register" class="account-register account-btn">注&nbsp;&nbsp;册</a>
+				<p class="reg-tooltip">据说用客户端注册可以减少答题哟～</p>
+			</div>
+			<a v-show="userShow" @click="logout()" class="account-btn">退出登录</a>
+
 		</div>
 		<!--[CDATA[YII-BLOCK-BODY-END]]-->
 		<footer>
@@ -53,7 +60,7 @@
 		</footer>
 	</div>
 </template>
-<!-- <link rel="stylesheet" href="https://static.hdslb.com/mobile/css/normalize.css"> -->
+
 <style scoped lang="css">
 	@import 'https://static.hdslb.com/mobile/css/normalize.css';
 	@import 'https://static.hdslb.com/mobile/css/mobile.css';
@@ -63,4 +70,44 @@
 	footer p{
 		line-height: 2;
 	}
+	.wrapper {
+	    position: relative;
+	    padding-top: 2px;
+	    overflow-x: hidden;
+	}
 </style>
+
+<script>
+	export default {
+		data(){
+			return {
+				userShow:false,
+				uname:''
+			}
+		},
+		methods:{
+			logout(){
+				var now = new Date();
+				now.setDate(now.getDate()-1);
+				now = now.toUTCString();
+				document.cookie = 'uname=null; expires='+now;
+				this.userShow = false;
+				this.uname = '';
+			}
+		},
+		mounted:function(){
+			// console.log(document.cookie);
+			// 渲染用户信息
+			if(document.cookie){
+				this.userShow = true;
+				this.uname = document.cookie.slice(6);
+				console.log(this.uname);
+			}else{
+				this.userShow = false;
+			}
+			console.log('模板渲染mounted----')
+			
+		}
+
+	}
+</script>
