@@ -37,7 +37,7 @@ var router = new VueRouter({
 		path: '/Rank',
 		component: Rank
 		},{
-			path: '/detail',
+			path: '/detail/:aid',
 			component: detail
 		}, {
 			path: '/',
