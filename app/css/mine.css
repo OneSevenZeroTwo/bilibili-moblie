@@ -55,7 +55,6 @@
 .bili-sub-icon-124,
 .bili-sub-icon-122,
 .bili-sub-icon-121 {
-  background-image: url("../img/channel.png");
   background-repeat: no-repeat;
 }
 
@@ -391,38 +390,32 @@
 .bili-sub-icon-164{
   width: 40px;
   height: 40px;
-  background-image: url('../img/body.png');
   background-size: contain;
 }
 .bili-sub-icon-161{
   width: 40px;
   height: 40px;
-  background-image: url('../img/handmake.png');
   background-size: contain;
 }
 .bili-sub-icon-162{
   width: 40px;
   height: 40px;
-  background-image: url('../img/painting.png');
   background-size: contain;
 }
 .bili-sub-icon-163{
   width: 40px;
   height: 40px;
-  background-image: url('../img/sports.png');
   background-size: contain;
 }
 .bili-sub-icon-168{
   width: 40px;
   height: 40px;
-  background-image: url('../img/s_channel_budaixi.png');
   background-size: contain;
   
 }
 .bili-sub-icon-169{
   width: 40px;
   height: 40px;
-  background-image: url('../img/s_channel_about_guoman.png');
   background-size: contain;
 
 }
@@ -507,7 +500,6 @@
   .bili-sub-icon-172,
   .bili-sub-icon-173,
   .bili-sub-icon-174{
-    background-image: url("../img/channel@2x.png");
     background-size: 320px 322.5px;
   }
 }
@@ -573,7 +565,6 @@
   .bili-sub-icon-172,
   .bili-sub-icon-173,
   .bili-sub-icon-174{
-    background-image: url("../img/channel@2x.png");
     background-size: 320px 322.5px;
   }
 }
@@ -1640,13 +1631,11 @@ body {
   background-position: -105px -206px;
   width: 20px;
   height: 19px;
-  background-image: url("../img/ui_3.png");
   background-repeat: no-repeat;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 2), not all, screen and (min-resolution: 2dppx) {
   .roll-bar .spanner i {
-    background-image: url("../img/ui_3@2x.png");
     background-size: 274px 228px;
   }
 }
@@ -1821,8 +1810,6 @@ body {
   user-select: none;
   color: #444;
   border: solid 1px #ddd;
-  background-image: -webkit-linear-gradient(bottom, #f8f8f8, #ffffff);
-  background-image: linear-gradient(to top, #f8f8f8, #ffffff);
   -webkit-transition: .1s all linear;
   transition: .1s all linear;
   border-radius: 4px;
@@ -1830,8 +1817,6 @@ body {
 
 .b-slt.on {
   border: solid 1px #aaa;
-  background-image: -webkit-linear-gradient(bottom, #f8f8f8, #ffffff);
-  background-image: linear-gradient(to top, #f8f8f8, #ffffff);
 }
 
 #list_order.b-slt {
@@ -2216,11 +2201,9 @@ footer .title {
 }
 
 .shortcut a.top {
-  background-image: url(../img/top.png);
 }
 
 .shortcut a.feedback {
-  background-image: url(../img/feedback.png);
 }
 
 .add-to-launcher {
@@ -2988,7 +2971,6 @@ footer .title {
   width: 32px;
   height: 32px;
   background-size: 32px;
-  background-image: url(../img/player_icon.png);
 }
 
 .floating-share-wrp .floating-share-box .share-list .icon + .icon {
@@ -3513,7 +3495,6 @@ footer .title {
   height: 36px;
   top: 9px;
   left: 12px;
-  background-image: url(../img/app_logo.v3.png);
   background-size: cover;
   border: 1px #fff solid;
   border-radius: 4px;
@@ -3543,7 +3524,6 @@ footer .title {
 .b-app-dl .dl-close{
   width: 22px;
   height: 22px;
-  background-image: url(../img/close_icon.png);
   background-position: 50%;
   background-size: 13px;
   background-repeat: no-repeat;
@@ -3552,7 +3532,6 @@ footer .title {
   top: 16px;
 }
 .b-app-dl-wrp .b-app-dl-l {
-  background-image: url(../img/app_dl.png);
   background-size: contain;
 }
 
@@ -3596,7 +3575,6 @@ footer .title {
 }
 
 .float-notice.nobg {
-  background-image: none;
 }
 
 .float-notice.nobg .txt {
@@ -3784,7 +3762,6 @@ footer .title {
   width: 40px;
   height: 40px;
   margin-right: 5px;
-  background-image: url(../img/player_icon2.png);
   background-repeat: no-repeat;
 }
 
@@ -4725,7 +4702,6 @@ footer {
 
 }
 .black-wrp .new-float-box .alert-icon{
-  background-image: url(//static.hdslb.com/mobile/img/alert-icon.png);
   height: 115px;
   width: 196px;
   margin-top: -105px;
@@ -4816,7 +4792,6 @@ footer {
   width: 50px;
   height: 50px;
   display: inline-block;
-  background-image: url(//static.hdslb.com/mobile/img/announcement-22.png);
   background-size: 100%;
   vertical-align: top;
 }
@@ -5359,21 +5334,18 @@ footer {
 .bili-icon-ent{
   width: 68px;
   height: 68px;
-  background-image: url("../img/channel_ent@2x.png");
   background-size: 68px 68px;
 }
 
 .bili-icon-life{
   width: 68px;
   height: 68px;
-  background-image: url("../img/channel_life@2x.png");
   background-size: 68px 68px;
 }
 
 .bili-icon-advertise{
   width: 68px;
   height: 68px;
-  background-image: url("../img/channel_advertise@2x.png");
   background-size: 68px 68px;
 }
 
@@ -5406,7 +5378,6 @@ footer {
 .bili-icon-circle-del,
 .bili-icon-arrow,
 .bili-icon-del {
-  background-image: url("../img/ui_3.png");
   background-repeat: no-repeat;
   display: block;
 }
@@ -5559,7 +5530,6 @@ footer {
   .bili-icon-circle-del,
   .bili-icon-arrow,
   .bili-icon-del {
-    background-image: url("../img/ui_3.png");
     background-size: 274px 228px;
     display: block;
   }
@@ -5587,7 +5557,6 @@ footer {
   .bili-icon-circle-del,
   .bili-icon-arrow,
   .bili-icon-del {
-    background-image: url("../img/ui_3@2x.png");
     background-size: 274px 228px;
     display: block;
   }
@@ -5990,7 +5959,6 @@ footer {
 
 .bilibili-index-sprite {
   display: inline-block;
-  background-image: url('../img/index.png');
   background-repeat: no-repeat;
   position: absolute;
   top: 12px;
@@ -6043,7 +6011,6 @@ footer {
 .bilibili-index-fashion{
   width: 20px;
   height: 20px;
-  background-image: url("../img/index_fashion.png")!important;
   background-size: contain!important;
 }
 
@@ -6063,7 +6030,6 @@ footer {
   width: 20px;
   height: 20px;
   background-size: 20px 20px!important;
-  background-image: url("../img/index_ent.png")!important;
 }
 
 .bilibili-index-douga {
@@ -6089,13 +6055,11 @@ footer {
   width: 20px;
   height: 20px;
   background-size: 20px 20px!important;
-  background-image: url('../img/index_life.png')!important;
 }
 .bilibili-index-guoman {
   width: 20px;
   height: 20px;
   background-size: 20px 20px!important;
-  background-image: url('../img/index_guoman.png')!important;
 }
 .bilibili-index-arrow {
   background-position: -5px -395px;
@@ -6125,27 +6089,23 @@ footer {
   width: 20px;
   height: 20px;
   background-size: 20px 20px!important;
-  background-image: url("../img/index_advertise.png")!important;
 }
 
 .bilibili-index-guoman{
   width: 20px;
   height: 20px;
-  background-image: url("../img/index_guoman.png")!important;
   background-size: contain!important;
 }
 
 
 @media screen and (-webkit-min-device-pixel-ratio: 1.0), screen and (min--moz-device-pixel-ratio: 1.0), screen and (min-device-pixel-ratio: 1.0), screen and (min-resolution: 1.0dppx) {
   .bilibili-index-sprite {
-    background-image: url('../img/index.png');
     background-size: 30px 462px;
   }
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 2.0), screen and (min--moz-device-pixel-ratio: 2.0), screen and (min-device-pixel-ratio: 2.0), screen and (min-resolution: 2.0dppx) {
   .bilibili-index-sprite {
-    background-image: url('../img/index@2x.png');
     background-size: 30px 462px;
   }
 }
@@ -6557,7 +6517,6 @@ footer {
   display: inline-block;
   width: 72px;
   height: 72px;
-  background-image: url(../img/tag-cover-default.png);
   background-size: 50%;
   background-position: center;
   background-repeat: no-repeat;

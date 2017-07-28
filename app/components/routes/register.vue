@@ -7,7 +7,7 @@
 		<div class="form">
 			<form name="form2" id="regUser" action="" method="post">
 				<div class="input-wrp">
-					<input @change="unameChange()" v-model="uname" type="text" name="uname" id="uname" autocomplete="off" placeholder="您的昵称, 例：哔哩哔哩">
+					<input v-model="uname" type="text" name="uname" id="uname" autocomplete="off" placeholder="您的昵称, 例：哔哩哔哩">
 				</div>
 				<span v-show="unameYZ" class="noticeText" id="uname-msg">这个昵称已经有人用过了</span>
 
@@ -310,8 +310,9 @@
 							self.unameYZ = true;
 						}else if(data.data=='ok'){
 							self.regSucc = true;
+							// 用户信息存入cookie（时效session）
+							document.cookie = 'uname='+self.uname;
 							// 设置延时跳转
-
 							setTimeout(function(){
 								location.href = '#/index';
 							},1000)
@@ -320,19 +321,7 @@
 						
 
 				})
-			},
-			unameChange:function(){
-				console.log(this.uname,this);
-				// console.log(this.$ajax)
-				/*this.$ajax.get('http://localhost:666/test').then(function(data){
-					console.log(data)
-				})*/
-
 			}
-		},
-		beforeUpdate:function(){
-
-
 		}
 	}
 </script>

@@ -1,14 +1,14 @@
 <template>
 	<div>
 		<header>
-			<a class="logo"></a>
+			<a href="#/index" class="logo"></a>
 			<a class="logoText">登录</a>
 		</header>
 
 		<div class="form">
 			<ul>
 				<li class="item username">
-					<div class="input-wrp"><input type="text" v-model="uname" placeholder="你的手机号/邮箱" id="login-username" maxlength="50" autocomplete="off" class=""></div>
+					<div class="input-wrp"><input type="text" v-model="uname" placeholder="你的用户名" id="login-username" maxlength="50" autocomplete="off" class=""></div>
 					<div v-show="unameYZ" class="text clearfix">
 						<p class="tips">用户名错误</p>
 					</div>
@@ -21,14 +21,12 @@
 					</div>
 				</li>
 				<li class="item vdcode">
-					<!---->
-					<div class="text clearfix" style="display: none;">
-						<p class="tips"></p>
-						<p class="tips"></p>
+				
+					<div class="text clearfix">
+						<label for="freeLogin">
+							<input style="width:1em;" type="checkbox" id="freeLogin" name="freeLogin">七天免登陆
+							</label>
 					</div>
-				</li>
-				<li class="sns-tips">
-					<!---->
 				</li>
 				<li class="btn-box">
 					<a @click="login()" class="btn btn-login">立即登录</a>
@@ -202,6 +200,10 @@
 		background-position: 50%;
 		background-size: 50px 50px;
 	}
+
+	.form .item.vdcode{
+		padding-bottom: 20px;
+	}
 </style>
 
 <script>
@@ -248,8 +250,18 @@
 							self.unameYZ = false;
 							self.pswYZ = false;
 							self.logSucc = true;
+							
+							/*sessionStorage.setItem('uname',self.uname)*/
+							
+							//七天免登陆设置
+							var checkbox = document.querySelector('#freeLogin');
+							if(checkbox.checked){
+								self.setCookie('uname',self.uname);
+							}else{
+								document.cookie = 'uname='+self.uname;
+							}
 							// 设置延时跳转
-							sessionStorage.setItem('uname',self.uname)
+							// 跳转到index页面
 							setTimeout(function(){
 								location.href = '#/index';
 							},1000)
@@ -258,7 +270,18 @@
 						
 
 				})
+			},
+			setCookie(name,val){
+				var str_cookie = name + '=' + val;
+
+				// 设置7天时效
+				var now = new Date();
+				now.setDate(now.getDate()+7);			
+				str_cookie += ';expires=' + now.toUTCString();
+
+				document.cookie = str_cookie;
 			}
+
 		}
 	}
 </script>
