@@ -28,6 +28,10 @@ import './css/home.css';
 import home from "./components/routes/home.vue";
 import detail from "./components/routes/detail.vue";
 import Rank from "./components/routes/Rank.vue";
+import mine from "./components/routes/mine.vue";
+import login from "./components/routes/login.vue";
+import register from "./components/routes/register.vue";
+
 var router = new VueRouter({
 	routes: [{
 			path: '/index',
@@ -37,11 +41,20 @@ var router = new VueRouter({
 		path: '/Rank',
 		component: Rank
 		},{
-			path: '/detail',
+			path: '/detail/:aid',
 			component: detail
 		}, {
 			path: '/',
 			redirect: '/index'
+		},{
+			path:'/mine',
+			component:mine
+		},{
+			path:'/login',
+			component:login
+		},,{
+			path:'/register',
+			component:register
 		}]
 		// （缩写）相当于 routes: routes
 });

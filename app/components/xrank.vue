@@ -1,64 +1,40 @@
 <template>
 	<div class="weui-panel weui-panel_access">
 		<div class="weui-panel__bd">
-			<!--<a :href="'#/detail/'+index" v-for="(n,index) in news" class="weui-media-box weui-media-box_appmsg">
-				<xcontentheader :imgurl="n.pic|webp"></xcontentheader>
-				<div class="weui-media-box__bd">
-					<h4 class="weui-media-box__title">{{n.title}}</h4>
-					<div class="index__author__src-ranking-board-item-"><img src="//s1.hdslb.com/bfs/static/mult/images/ico_up.png" alt="">
-						<p>{{n.author}}</p>
-						<div class="index__clear__src-ranking-board-item-"></div>
-					</div>
-					<div class="index__subInfo__src-ranking-board-item-">
-						<div class="index__playAmount__src-ranking-board-item-"><img src="//s1.hdslb.com/bfs/static/mult/images/ico_play.png" alt="">
-							<p>{{n.play}}</p>
-							<div class="index__clear__src-ranking-board-item-"></div>
-						</div>
-						<div class="index__danmuAmount__src-ranking-board-item-"><img src="//s1.hdslb.com/bfs/static/mult/images/ico_danmu.png" alt="">
-							<p>{{n.video_review}}</p>
-							<div class="index__clear__src-ranking-board-item-"></div>
-						</div>
-						<div class="index__clear__src-ranking-board-item-"></div>
-					</div>
-
-				</div>
-			</a>-->
-			<a class="index__item__src-ranking-board-item-":href="'#/detail/'+index" v-for="(n,index) in news">
+			<a class="index__item__src-ranking-board-item-" :href="'#/detail/'+index" v-for="(n,index) in news">
 				<div class="index__leftMark__src-ranking-board-item-" v-if="index<3">
 					<xcontent :Imgurl="Img[index]"></xcontent>
 				</div>
 				<div class="index__leftMark__src-ranking-board-item-" v-else>
-					<p>{{index}}</p>
+					<p>{{index+1}}</p>
 				</div>
-				<xcontentheader :imgurl="images[index]"></xcontentheader>
+				<xcontentheader :imgurl="images[parseInt(Math.random()*29) + 1]"></xcontentheader>
 				<div class="index__desc__src-ranking-board-item-">
 					<div class="index__title__src-ranking-board-item-">
 						<p>{{n.title}}</p>
 					</div>
-					<div class="index__author__src-ranking-board-item-"><img src="//s1.hdslb.com/bfs/static/mult/images/ico_up.png" alt="">
+					<div class="index__author__src-ranking-board-item-"><img src="http://s1.hdslb.com/bfs/static/mult/images/ico_up.png" alt="">
 						<p>{{n.author}}</p>
 					</div>
 					<div class="index__subInfo__src-ranking-board-item-">
-						<div class="index__playAmount__src-ranking-board-item-"><img src="//s1.hdslb.com/bfs/static/mult/images/ico_play.png" alt="">
-							<p>{{n.play}}</p>						
+						<div class="index__playAmount__src-ranking-board-item-"><img src="http://s1.hdslb.com/bfs/static/mult/images/ico_play.png" alt="">
+							<p>{{n.play|num}}</p>
 						</div>
-						<div class="index__danmuAmount__src-ranking-board-item-"><img src="//s1.hdslb.com/bfs/static/mult/images/ico_danmu.png" alt="">
+						<div class="index__danmuAmount__src-ranking-board-item-"><img src="http://s1.hdslb.com/bfs/static/mult/images/ico_danmu.png" alt="">
 							<p>{{n.video_review}}</p>
-						</div>				
+						</div>
 					</div>
-				</div>		
+				</div>
 			</a>
+			<div @click="goTop()" class="index__toTop__src-ranking-board-" data-reactid="45" style="display: block;"><img src="http://s1.hdslb.com/bfs/static/mult/images/toTop1.png" alt="" data-reactid="46"></div>
 		</div>
-		<div class="weui-panel__ft" v-show="isLoadMore">
+		<span @click="loadMore()" class="index__downLoadBtn__src-ranking-board-">点击查看更多</span>
+		<!--<div class="weui-panel__ft" v-show="isLoadMore">
 			<a href="javascript:void(0);" @click="loadMore()" class="weui-cell weui-cell_access weui-cell_link">
 				<div class="weui-cell__bd">查看更多</div>
 				<span class="weui-cell__ft"></span>
 			</a>
-		</div>
-		<div class="weui-loadmore" v-show="isLoadMore">
-			<i class="weui-loading"></i>
-			<span class="weui-loadmore__tips">正在加载</span>
-		</div>
+		</div>-->
 	</div>
 </template>
 <script>
@@ -66,7 +42,7 @@
 		data() {
 			return {
 				//news: null,
-				isLoadMore: true
+				isLoadMore: true,
 			}
 		},
 		computed: {
@@ -74,25 +50,37 @@
 				return this.$store.state.count
 			},
 			news() {
-				return this.$store.state.Ranks
+				return this.$store.state.Ranks.slice(0,this.$store.state.list)
 			},
-			Img(){
+			Img() {
 				return this.$store.state.Img
 			},
-			images(){
-				console.log(this)
+			images() {
+				console.log(this.$route.path.slice(6))
 				console.log(this.$store.state.Ranks)
 				return this.$store.state.images
-			}
+			},
+			
 		},
 		methods: {
-			loadMore() {
+			setrans() {
 				console.log(this)
-				this.$store.dispatch("setRank")
+				this.$store.dispatch("setRank",this.$route.path.slice(6))
+			},
+			loadMore() {
+				this.$store.state.list=this.$store.state.list+20
+			},
+			goTop(){
+				var timer = setInterval(function() {
+					document.body.scrollTop = document.body.scrollTop - 50;
+					if(document.body.scrollTop == 0) {
+						clearInterval(timer)
+					}
+				}, 1)
 			}
 		},
 		mounted() {
-			this.loadMore();
+			this.setrans();
 			console.log(this.$http)
 
 		},
@@ -103,14 +91,22 @@
 			},
 			webp(input) {
 				return input + '@234w_146h.webp'
+			},
+			num(input){
+					if(input<10000){
+						return input;
+					}else if(input>10000){
+						var n= Math.round((input/10000) * 100) / 100+"万";
+						return n
+					}
 			}
 		},
 		components: {
 			xcontentheader: {
 				props: ["imgurl"],
 				template: `
-				<div class="weui-media-box__hd">
-					<img @click="showGallery(imgurl)" class="weui-media-box__thumb" :src="imgurl" alt="">
+				<div class="index__imageContainer__src-ranking-board-item-">
+					<img style="display: block;width: 100%;" @click="showGallery(imgurl)" :src="imgurl" alt="">
 				</div>
 			`,
 				methods: {
@@ -138,6 +134,17 @@
 	}
 </script>
 <style scoped>
+	.index__downLoadBtn__src-ranking-board-{
+		    display: block;
+    margin: .896rem .512rem 0;
+    height: 1.536rem;
+    line-height: 1.536rem;
+    font-size: .55467rem;
+    color: #fff;
+    background-color: #fb7299;
+    border-radius: .128rem;
+    text-align: center;
+	}
 	.weui-panel__ft {
 		margin-bottom: 50px;
 	}
@@ -145,87 +152,97 @@
 	.weui-loadmore {
 		margin-bottom: 70px;
 	}
-	.weui-panel__bd{
-		    position: relative;
-    width: 100%;
-    padding-bottom: .42667rem;
-    background-color: #f4f4f4;
-    overflow: hidden;
-	}
-	.index__item__src-ranking-board-item-{
-		    display: block;
-    text-decoration: none;
-    position: relative;
-    width: 100%;
-    margin-top: .768rem;
-    opacity: 1;
-	}
-	.index__leftMark__src-ranking-board-item-{
-		    position: relative;
-    float: left;
-    width: 2.176rem;
-    height: 3.11467rem;
-    background-color: #f4f4f4;
-	}
-	.index__leftMark__src-ranking-board-item- img{
-		    display: block;
-    width: .81067rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%,-50%);
-	}
-	.index__leftMark__src-ranking-board-item- p{
-		    text-align: center;
-    font-size: .59733rem;
-    color: #999;
-    line-height: 3.11467rem;
-	}
-	.index__imageContainer__src-ranking-board-item-{
-		    position: relative;
-    float: left;
-    width: 4.992rem;
-    height: 3.11467rem;
-    overflow: hidden;
-    border-radius: .17067rem;
-    background-color: #e7e7e7;
-    background-image: url(//s1.hdslb.com/bfs/static/mult/images/tv.png);
-    background-position: .93867rem 0;
-    background-size: 3.11467rem 3.11467rem;
-    background-repeat: no-repeat;
-	}
-	.index__imageContainer__src-ranking-board-item- img{
-		    display: block;
-    width: 100%;
-	}
-	.index__desc__src-ranking-board-item-{
+	
+	.weui-panel__bd {
 		position: relative;
-    margin-left: 7.68rem;
-    margin-right: .512rem;
+		width: 100%;
+		padding-bottom: .42667rem;
+		background-color: #f4f4f4;
+		overflow: hidden;
 	}
+	
+	.index__item__src-ranking-board-item- {
+		display: block;
+		text-decoration: none;
+		position: relative;
+		width: 100%;
+		margin-top: 1.3rem;
+		opacity: 1;
+	}
+	
+	.index__leftMark__src-ranking-board-item- {
+		position: relative;
+		float: left;
+		width: 2.176rem;
+		height: 3.11467rem;
+		background-color: #f4f4f4;
+	}
+	
+	.index__leftMark__src-ranking-board-item- img {
+		display: block;
+		width: .81067rem;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		-webkit-transform: translate(-50%, -50%);
+	}
+	
+	.index__leftMark__src-ranking-board-item- p {
+		text-align: center;
+		font-size: .59733rem;
+		color: #999;
+		line-height: 3.11467rem;
+	}
+	
+	.index__imageContainer__src-ranking-board-item- {
+		position: relative;
+		float: left;
+		width: 4.992rem;
+		height: 3.11467rem;
+		margin-top: 7px;
+		overflow: hidden;
+		border-radius: .17067rem;
+		background-color: #e7e7e7;
+		background-image: url(//s1.hdslb.com/bfs/static/mult/images/tv.png);
+		background-position: .93867rem 0;
+		background-size: 3.11467rem 3.11467rem;
+		background-repeat: no-repeat;
+	}
+	.index__desc__src-ranking-board-item- {
+		position: relative;
+		margin-left: 7.68rem;
+		margin-right: .512rem;
+	}
+	
 	.index__author__src-ranking-board-item- {
 		position: relative;
 		width: 100%;
 		height: 1.19467rem;
 		margin-top: .08533rem;
 	}
-	.index__title__src-ranking-board-item-{
-		    position: relative;
-    width: 100%;
+	
+	.index__title__src-ranking-board-item- {
+		position: relative;
+		width: 100%;
 	}
-	.index__title__src-ranking-board-item- p{
-		    text-align: left;
-    font-size: .59733rem;
-    color: #212121;
-    line-height: .8rem;
-    word-break: break-all;
+	
+	.index__title__src-ranking-board-item- p {
+		text-align: left;
+		font-size: .59733rem;
+		color: #212121;
+		line-height: 1.0rem;
+		word-break: break-all;
+		max-height: 2.0rem;
+		overflow: hidden;
 	}
-	.index__author__src-ranking-board-item-{
-		    position: relative;
-    width: 100%;
-    height: 1.19467rem;
-    margin-top: .08533rem;
+	
+	.index__author__src-ranking-board-item- {
+		position: relative;
+		width: 100%;
+		height: 1.19467rem;
+		margin-top: .08533rem;
 	}
+	
 	.index__author__src-ranking-board-item- img {
 		position: relative;
 		display: block;
@@ -233,13 +250,15 @@
 		width: .59733rem;
 		float: left;
 	}
-	.index__author__src-ranking-board-item- p{
-		    margin-left: .85333rem;
-    text-align: left;
-    font-size: .512rem;
-    color: #999;
-    line-height: 1.19467rem;
+	
+	.index__author__src-ranking-board-item- p {
+		margin-left: .85333rem;
+		text-align: left;
+		font-size: .512rem;
+		color: #999;
+		line-height: 1.19467rem;
 	}
+	
 	.index__subInfo__src-ranking-board-item- {
 		position: relative;
 		width: 100%;
@@ -275,5 +294,19 @@
 		vertical-align: middle;
 		width: .59733rem;
 		float: left;
+	}
+	.index__toTop__src-ranking-board-{
+		    position: fixed;
+    bottom: 2.13333rem;
+    right: .896rem;
+    width: 1.70667rem;
+    display: block;
+	}
+	.index__toTop__src-ranking-board- img{
+		    display: block;
+    width: 100%;
+	}
+	.index__subInfo__src-ranking-board-item-{
+		padding-top: 4px;
 	}
 </style>
