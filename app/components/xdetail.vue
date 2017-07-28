@@ -49,10 +49,11 @@
 		</div>
 		<div class="author">
 			<a href="" class="author_face">
-				<img :src="author_face">
+				<img src="">
+				<!-- <img :src="author_face"> -->
 			</a>
 			<a href="" class="author_name">{{author}}</a>
-			<span>两天前投递</span>
+			<span>{{pubdate|showtime}}前投递</span>
 			<a href="" class="attention">关注</a>
 		</div>
 		<div class="partbox">
@@ -63,7 +64,7 @@
 					<!-- slides -->
 					<swiper-slide v-for="i in partc">
 						<a class="partc">
-							<p>{{i}}</p>
+							<p>选集{{i}}</p>
 						</a>
 					</swiper-slide>
 					<!-- Optional controls -->
@@ -79,7 +80,7 @@
 			<h3>相关视频</h3>
 			<div class="relatedid">
 				<div class="videolist">
-					<a v-for="li in visiblelist">
+					<a v-for="li in visiblelist" :href="'#/detail/'+li.aid" @click="jump(li.aid,li.title,li.owner.name,li.stat.view,li.stat.danmaku)">
 						<span class="list_pic">
 							<!-- <img :src="li.pic"> -->
 							<img src="">
@@ -135,8 +136,23 @@
 </template>
 <!--JS-->
 <script>
+	import {
+		swiper,
+		swiperSlide
+	} from 'vue-awesome-swiper'
 	export default {
+		updated() {
+			console.log('更新');
+			if (this.isjump) {
+				this.page = 0;
+				this.showMsg();
+				this.isjump = false;
+				document.body.scrollTop = 0;
+				console.log('渲染成功');
+			}
+		},
 		mounted() {
+			console.log('初始')
 			var swiper = new Swiper('.swiper-container',{
 				observer:true,//修改swiper自己或子元素时，自动初始化swiper
 				observeParents:true,//修改swiper的父元素时，自动初始化swiper
@@ -146,46 +162,13 @@
 			//detail/?id=1
 			// console.log(this.$route.query)
 			this.aid = this.$route.params.aid;
-
-			//相关视频
-			var xml = new XMLHttpRequest();
-			xml.open('GET',"https://comment.bilibili.com/recommendnew,"+this.aid,true);
-			xml.send();
-			xml.onreadystatechange = function(){
-				if (xml.readyState == 4&&(xml.status==200||xml.status==304)) {
-					var data = JSON.parse(xml.responseText).data
-					// console.log(data)
-					this.list = data;
-					this.loadmore();
-				}
-			}.bind(this);
-
-			this.$ajax.get('http://localhost:12345/detail', {
-				params: {
-			      aid:this.aid
-			    }
-			})
-			.then((response) => {
-				var data = response.data[0];
-				console.log(data);
-				//如果数据库中存在就更换数据，否则用回默认
-				if(data){
-					this.title = data.title;
-					this.desc = data.descri;
-					this.view = JSON.parse(data.stat).view;
-					this.danmaku = JSON.parse(data.stat).danmaku;
-					this.tname = data.tname;
-					this.author = JSON.parse(data.owner).name;
-					this.author_face = JSON.parse(data.owner).face;
-				}
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+			this.showMsg()
 		},
 		data(){
 			return {
-				swiperOption:'',
+				swiperOption: {
+					width:90,
+				},
 				isshowdesc:true,
 				aid:'',
 				title:"【fate】全英灵从者资料合集·17年夏",
@@ -194,14 +177,16 @@
 				desc:"终于完成了~~~花费时间实在太长~~视频一共分为12P。欧洲6组，亚洲4组，最后加上美洲非洲，月球。别问我为何分P那么多，实在是因为内存需求太大了！这已经是极限分P了（哭~）最后，视频内容如果错误不大，修正就放在下次更新吧，下次更新——会是什么时候呢？",
 				tname:"综合",
 				author:"光之主",
+				pubdate:"1500853582",
 				author_face:"//i1.hdslb.com/bfs/face/b2963d6a16c785d80b57adef8c046aae4f927dfb.jpg",
-				partc:['a','b','c','d','e','a','b','c','d','e'],
+				partc:['a','b','c','d','e','f','g','h','i','j','k','l','m'],
 				tags:["型月","fate","英灵","fate grand order","fgo","fate extra","fate zero","fate全系列","fate prototype"],
 				//加载
 				list:[],
 				visiblelist:[],
 				page:0,
 				isload:'刚刚看到这里，点击加载更多~',
+				isjump:false,
 				//评论
 				reviews:[{
 					rv_pic:"//i1.hdslb.com/bfs/face/8d24da56f5c69f910f7484e91a04c9aff4eaedf4.jpg@80w_80h.webp",
@@ -257,16 +242,102 @@
 						clearInterval(timer)
 					}
 				},50)
-			}
+			},
+			//页面渲染
+			showMsg(){
+				// this.aid = this.$route.params.aid;
+				//相关视频
+				var xml = new XMLHttpRequest();
+				xml.open('GET',"https://comment.bilibili.com/recommendnew,"+this.aid,true);
+				xml.send();
+				xml.onreadystatechange = function(){
+					if (xml.readyState == 4&&(xml.status==200||xml.status==304)) {
+						var data = JSON.parse(xml.responseText).data
+						// console.log(data)
+						this.list = data;
+						this.loadmore();
+					}
+				}.bind(this);
+
+				try{
+
+					this.$ajax.get('http://localhost:12345/detail', {
+						params: {
+					      aid:this.aid
+					    }
+					})
+					.then((response) => {
+						console.log('使用数据库的数据');
+						var data = response.data[0];
+						// console.log(data.ctime);
+						//如果数据库中存在就更换数据，否则用回默认
+						if(data){
+							this.title = data.title;
+							this.desc = data.descri;
+							this.view = JSON.parse(data.stat).view;
+							this.danmaku = JSON.parse(data.stat).danmaku;
+							this.tname = data.tname;
+							this.author = JSON.parse(data.owner).name;
+							this.author_face = JSON.parse(data.owner).face;
+							//计算投递时间 改为过滤器计算
+							// var pd = data.pubdate;
+							// var nd = new Date().getTime()/1000;
+							// var sd = nd-pd
+							// var oneDay = 60*60*24;
+						 	// this.pubdate = Math.floor(sd/oneDay);
+							this.pubdate = data.pbudate;
+						}
+					})
+					.catch((error) => {
+						console.log(error);
+					});
+
+				}catch(err){
+					console.log(err)
+				}	
+
+			},
+
+			jump(aid,title,name,view,danmaku){
+				console.log('jump');
+				this.isjump = true;
+				this.aid = aid;
+				this.title = title;
+				this.author = name;
+				this.view = view;
+				this.danmaku = danmaku;
+			},
 		},
-		//浏览或弹幕数超过1w则四舍五入
+
 		filters:{
+			//浏览或弹幕数超过1w则四舍五入
+			//计算弹幕数和浏览数
 			showview(input){
 				if (input>10000) {
 					return (input/10000).toFixed(1)+'万'
 				}
 				return input
 			},
+			//计算投递日期
+			showtime(input){
+				var pd = input
+				var nd = new Date().getTime()/1000;
+				var sd = nd-pd
+				var oneDay = 60*60*24;
+				var days = Math.floor(sd/oneDay);
+				if (days>30&&days<365) {
+					var day = Math.floor(days/30)+'月';
+					return day
+				}else if(days>365) {
+					var day = Math.floor(days/365)+'年';
+					return day
+				}else if(days<1) {
+					var hour = Math.floor(sd/60*60)+'小时';
+					return hour
+				}else if(days>1&&days<30) {
+					return days+'天'
+				}
+			}
 		}
 	}
 </script>
@@ -360,7 +431,6 @@
     	    // height: 5.85333rem;
 		    margin-bottom: 1.024rem;
 		    overflow: hidden;
-		    transition: all .5s;
 		    .desc{
 	    	    line-height: .85333rem;
 			    color: #757575;
@@ -386,6 +456,7 @@
 		    }
 	    }
 	    .showdesc{
+	    	transition: all .5s;
 	    	height:.85333rem;
 	    }
 	}

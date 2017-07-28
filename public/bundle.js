@@ -169,7 +169,7 @@ module.exports = function normalizeComponent (
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var bind = __webpack_require__(8);
+var bind = __webpack_require__(9);
 var isBuffer = __webpack_require__(24);
 
 /*global toString:true*/
@@ -1344,10 +1344,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(9);
+    adapter = __webpack_require__(10);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(9);
+    adapter = __webpack_require__(10);
   }
   return adapter;
 }
@@ -1417,6 +1417,39 @@ module.exports = defaults;
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+/**
+ * Vue-awesome-swiper
+ * @author Surmon.me
+ */
+
+var Swiper = __webpack_require__(14);
+var SwiperComponent = __webpack_require__(41);
+var SlideComponent = __webpack_require__(47);
+SwiperComponent = SwiperComponent.default || SwiperComponent;
+SlideComponent = SlideComponent.default || SlideComponent;
+if (typeof window !== 'undefined') {
+  window.Swiper = Swiper;
+}
+
+var swiper = {
+  swiperSlide: SlideComponent,
+  swiper: SwiperComponent,
+  swiperPlugins: Swiper.prototype.plugins,
+  install: function install(Vue) {
+    Vue.component(SwiperComponent.name, SwiperComponent);
+    Vue.component(SlideComponent.name, SlideComponent);
+  }
+};
+
+module.exports = swiper;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -1458,7 +1491,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1475,7 +1508,7 @@ module.exports = function bind(fn, thisArg) {
 };
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1486,7 +1519,7 @@ var settle = __webpack_require__(27);
 var buildURL = __webpack_require__(29);
 var parseHeaders = __webpack_require__(30);
 var isURLSameOrigin = __webpack_require__(31);
-var createError = __webpack_require__(10);
+var createError = __webpack_require__(11);
 var btoa = typeof window !== 'undefined' && window.btoa && window.btoa.bind(window) || __webpack_require__(32);
 
 module.exports = function xhrAdapter(config) {
@@ -1656,7 +1689,7 @@ module.exports = function xhrAdapter(config) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1680,7 +1713,7 @@ module.exports = function createError(message, config, code, request, response) 
 };
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1691,7 +1724,7 @@ module.exports = function isCancel(value) {
 };
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1715,39 +1748,6 @@ Cancel.prototype.toString = function toString() {
 Cancel.prototype.__CANCEL__ = true;
 
 module.exports = Cancel;
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Vue-awesome-swiper
- * @author Surmon.me
- */
-
-var Swiper = __webpack_require__(14);
-var SwiperComponent = __webpack_require__(41);
-var SlideComponent = __webpack_require__(47);
-SwiperComponent = SwiperComponent.default || SwiperComponent;
-SlideComponent = SlideComponent.default || SlideComponent;
-if (typeof window !== 'undefined') {
-  window.Swiper = Swiper;
-}
-
-var swiper = {
-  swiperSlide: SlideComponent,
-  swiper: SwiperComponent,
-  swiperPlugins: Swiper.prototype.plugins,
-  install: function install(Vue) {
-    Vue.component(SwiperComponent.name, SwiperComponent);
-    Vue.component(SlideComponent.name, SlideComponent);
-  }
-};
-
-module.exports = swiper;
 
 /***/ }),
 /* 14 */
@@ -6856,7 +6856,7 @@ var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _vueAwesomeSwiper = __webpack_require__(13);
+var _vueAwesomeSwiper = __webpack_require__(7);
 
 var _vueAwesomeSwiper2 = _interopRequireDefault(_vueAwesomeSwiper);
 
@@ -20995,7 +20995,7 @@ module.exports = __webpack_require__(23);
 
 
 var utils = __webpack_require__(1);
-var bind = __webpack_require__(8);
+var bind = __webpack_require__(9);
 var Axios = __webpack_require__(25);
 var defaults = __webpack_require__(6);
 
@@ -21030,9 +21030,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(12);
+axios.Cancel = __webpack_require__(13);
 axios.CancelToken = __webpack_require__(39);
-axios.isCancel = __webpack_require__(11);
+axios.isCancel = __webpack_require__(12);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -21191,7 +21191,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(10);
+var createError = __webpack_require__(11);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -21586,7 +21586,7 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(1);
 var transformData = __webpack_require__(36);
-var isCancel = __webpack_require__(11);
+var isCancel = __webpack_require__(12);
 var defaults = __webpack_require__(6);
 
 /**
@@ -21717,7 +21717,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(12);
+var Cancel = __webpack_require__(13);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -22389,7 +22389,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _xheader = __webpack_require__(7);
+var _xheader = __webpack_require__(8);
 
 var _xheader2 = _interopRequireDefault(_xheader);
 
@@ -22713,7 +22713,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _vueAwesomeSwiper = __webpack_require__(13);
+var _vueAwesomeSwiper = __webpack_require__(7);
 
 exports.default = {
 	data: function data() {
@@ -23913,7 +23913,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _xheader = __webpack_require__(7);
+var _xheader = __webpack_require__(8);
 
 var _xheader2 = _interopRequireDefault(_xheader);
 
@@ -24146,7 +24146,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n.showmore[data-v-76421fee] {\n  position: absolute;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  margin: auto 0;\n  width: .74667rem;\n  height: .53333rem;\n  background: url(//s1.hdslb.com/bfs/static/mult/images/ui_2.png) no-repeat;\n  background-size: 15.36rem 46.72rem;\n  background-position: -5.29067rem -6.10133rem;\n  transition: all .1s;\n}\n.showless[data-v-76421fee] {\n  position: absolute;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  margin: auto 0;\n  width: .74667rem;\n  height: .53333rem;\n  background: url(//s1.hdslb.com/bfs/static/mult/images/ui_2.png) no-repeat;\n  background-size: 15.36rem 46.72rem;\n  background-position: -5.29067rem -7.36rem;\n  transition: all .1s;\n}\n.detail_select[data-v-76421fee] {\n  width: 100%;\n}\n.detail_select ul[data-v-76421fee] {\n    display: flex;\n    padding-left: 20px;\n    border-bottom: 1px solid #ccc;\n}\n.detail_select ul li[data-v-76421fee] {\n      display: block;\n      height: 50px;\n      width: 33%;\n}\n.detail_select ul li a[data-v-76421fee] {\n        font-size: 15px;\n        color: #999;\n        display: block;\n        width: 100%;\n        height: 100%;\n        text-align: center;\n        line-height: 50px;\n        position: relative;\n}\n.detail_select ul li a img[data-v-76421fee] {\n          display: block;\n          width: 20px;\n          height: 20px;\n          position: absolute;\n          top: 16px;\n          left: 16px;\n}\n.detail_desc[data-v-76421fee] {\n  padding: .832rem .512rem 0;\n  border-bottom: .02133rem solid #ccc;\n  background: #f3f3f3;\n}\n.detail_desc h1[data-v-76421fee] {\n    margin: 0 0 .49067rem;\n    line-height: 1.024rem;\n    font-size: .64rem;\n    font-weight: 500;\n    color: #212121;\n}\n.detail_desc .view[data-v-76421fee] {\n    position: relative;\n    margin-bottom: .66933rem;\n    color: #757575;\n}\n.detail_desc .view p[data-v-76421fee] {\n      display: inline-block;\n      height: .53333rem;\n      vertical-align: middle;\n      line-height: .53333rem;\n      font-size: .512rem;\n}\n.detail_desc .descwarp[data-v-76421fee] {\n    margin-bottom: 1.024rem;\n    overflow: hidden;\n    transition: all .5s;\n}\n.detail_desc .descwarp .desc[data-v-76421fee] {\n      line-height: .85333rem;\n      color: #757575;\n      font-size: .512rem;\n}\n.detail_desc .descwarp .src[data-v-76421fee] {\n      margin-top: .768rem;\n      font-size: .512rem;\n      color: #999;\n}\n.detail_desc .descwarp .src a[data-v-76421fee] {\n        float: left;\n        color: #fb7299;\n        font-size: .512rem;\n        margin-right: .21333rem;\n}\n.detail_desc .descwarp .src a[data-v-76421fee]::after {\n        display: inline-block;\n        margin-left: .21333rem;\n        font-size: .512rem;\n        content: \">\";\n        color: #ccc;\n}\n.detail_desc .showdesc[data-v-76421fee] {\n    height: .85333rem;\n}\n.author[data-v-76421fee] {\n  position: relative;\n  padding: .68267rem 0 .68267rem 2.64533rem;\n  min-height: 1.70667rem;\n  border-bottom: .02133rem solid #ccc;\n  background-color: #f3f3f3;\n}\n.author .author_face[data-v-76421fee] {\n    position: absolute;\n    left: .512rem;\n    width: 1.70667rem;\n    height: 1.70667rem;\n    border-radius: .85333rem;\n    border: .02133rem solid #ccc;\n    overflow: hidden;\n}\n.author .author_face img[data-v-76421fee] {\n      width: 100%;\n      height: 100%;\n}\n.author .author_name[data-v-76421fee] {\n    display: block;\n    min-width: 4.69333rem;\n    margin-top: .17067rem;\n    line-height: .59733rem;\n    font-size: .59733rem;\n    color: #212121;\n}\n.author span[data-v-76421fee] {\n    margin-top: .384rem;\n    display: block;\n    line-height: .512rem;\n    font-size: .512rem;\n    color: #999;\n}\n.author .attention[data-v-76421fee] {\n    position: absolute;\n    margin: auto 0;\n    top: 0;\n    bottom: 0;\n    right: .512rem;\n    width: 3.072rem;\n    height: 1.28rem;\n    border-radius: .17067rem;\n    text-align: center;\n    font-size: .55467rem;\n    line-height: 1.28rem;\n    color: #fb7299;\n    border: .04267rem solid #fb7299;\n    background-color: #fff;\n}\n.partbox[data-v-76421fee] {\n  position: relative;\n  background-color: #f3f3f3;\n  width: 93.4%;\n  padding: .68267rem 3.2% 0;\n  border-bottom: .02133rem solid #ccc;\n  overflow: hidden;\n}\n.partbox .partTop[data-v-76421fee] {\n    position: relative;\n    width: 100%;\n    margin-bottom: .896rem;\n}\n.partbox .partTop span[data-v-76421fee] {\n      font-size: .64rem;\n      line-height: .64rem;\n      color: #212121;\n      text-align: left;\n}\n.partbox .partcontent[data-v-76421fee] {\n    position: relative;\n    width: 100%;\n    overflow: hidden;\n    margin-bottom: .896rem;\n}\n.partbox .partcontent .partc[data-v-76421fee] {\n      display: block;\n      width: 25%;\n      height: 50px;\n      position: relative;\n      float: left;\n      width: 5.09867rem;\n      height: 2.73067rem;\n      border: .04267rem solid #fb7299;\n      border-radius: .42667rem;\n      margin-right: .42667rem;\n      background-color: #fff;\n}\n.partbox .partcontent .partc p[data-v-76421fee] {\n        position: absolute;\n        top: 50%;\n        left: 50%;\n        width: 4.26667rem;\n        transform: translate(-50%, -50%);\n        -webkit-transform: translate(-50%, -50%);\n        color: #fb7299;\n        font-size: .512rem;\n        line-height: .768rem;\n        text-align: center;\n}\n.relatedtag[data-v-76421fee] {\n  padding: 1.024rem 0 .384rem .512rem;\n  border-bottom: .02133rem solid #ccc;\n  color: #212121;\n  background-color: #f3f3f3;\n  overflow: hidden;\n}\n.relatedtag h3[data-v-76421fee] {\n    margin-bottom: .85333rem;\n    font-weight: 400;\n    font-size: .64rem;\n}\n.relatedtag a[data-v-76421fee] {\n    float: left;\n    display: block;\n    margin: 0;\n    padding: 0;\n    text-decoration: none;\n    margin-bottom: .512rem;\n    margin-right: .42667rem;\n    padding: .40533rem .68267rem;\n    font-size: .55467rem;\n    border: .02133rem solid #ccc;\n    border-radius: .68267rem;\n    color: #505050;\n    background-color: #fff;\n    text-align: center;\n}\n.relatedvideo[data-v-76421fee] {\n  padding: 1.024rem 0 0;\n  background-color: #f3f3f3;\n}\n.relatedvideo h3[data-v-76421fee] {\n    padding-left: .512rem;\n    margin-bottom: .42667rem;\n    font-size: .64rem;\n    font-weight: 400;\n}\n.relatedvideo .relatedid .videolist[data-v-76421fee] {\n    padding: 0 .512rem;\n}\n.relatedvideo .relatedid .videolist a[data-v-76421fee] {\n      display: block;\n      position: relative;\n      padding: .42667rem 0 .42667rem 5.504rem;\n      height: 3.61467rem;\n      overflow: hidden;\n      border-top: .02133rem solid #ccc;\n}\n.relatedvideo .relatedid .videolist a .list_pic[data-v-76421fee] {\n        position: absolute;\n        top: .42667rem;\n        left: 0;\n        width: 4.992rem;\n        height: 3.11467rem;\n        border-radius: .128rem;\n        overflow: hidden;\n}\n.relatedvideo .relatedid .videolist a .list_pic img[data-v-76421fee] {\n          width: 100%;\n          height: 100%;\n}\n.relatedvideo .relatedid .videolist a .list_content .list_title[data-v-76421fee] {\n        display: block;\n        margin-bottom: 9px;\n        max-height: 1.536rem;\n        line-height: .968rem;\n        font-size: .59733rem;\n        color: #212121;\n}\n.relatedvideo .relatedid .videolist a .list_content .list_author[data-v-76421fee] {\n        display: block;\n        margin-bottom: 6px;\n        line-height: .68267rem;\n        font-size: .512rem;\n        color: #757575;\n}\n.relatedvideo .relatedid .videolist a .list_content .list_view[data-v-76421fee] {\n        line-height: .68267rem;\n        font-size: .512rem;\n        color: #757575;\n}\n.relatedvideo .relatedid .videolist a .list_content .list_view span[data-v-76421fee] {\n          float: left;\n          width: 50%;\n}\n.relatedvideo .relatedid .loadmore[data-v-76421fee] {\n    margin-top: .512rem;\n    width: 100%;\n    line-height: 1.728rem;\n    font-size: .55467rem;\n    color: #fb7299;\n    background-color: #e7e7e7;\n    text-align: center;\n}\n.review[data-v-76421fee] {\n  padding-top: 1.024rem;\n  background-color: #f3f3f3;\n}\n.review h3[data-v-76421fee] {\n    margin-bottom: .08533rem;\n    margin-left: .512rem;\n    font-size: .64rem;\n    font-weight: 400;\n}\n.review .review_content[data-v-76421fee] {\n    padding: 0 .512rem;\n}\n.review .review_content .review_list[data-v-76421fee] {\n      position: relative;\n      padding: .768rem 0 .66133rem 2.13333rem;\n      min-height: 1.70667rem;\n      border-top: .02133rem solid #ccc;\n      overflow: hidden;\n}\n.review .review_content .review_list .rv_pic[data-v-76421fee] {\n        position: absolute;\n        width: 1.70667rem;\n        height: 1.70667rem;\n        top: .768rem;\n        left: 0;\n        border-radius: 50%;\n        overflow: hidden;\n}\n.review .review_content .review_list .rv_pic img[data-v-76421fee] {\n          width: 100%;\n          height: 100%;\n}\n.review .review_content .review_list .rv_name[data-v-76421fee] {\n        display: block;\n        max-width: 60%;\n        margin-bottom: .512rem;\n        color: #757575;\n        font-size: .55467rem;\n}\n.review .review_content .review_list .rv_time[data-v-76421fee] {\n        position: absolute;\n        top: .81067rem;\n        right: 0;\n        font-size: .46933rem;\n        color: #999;\n}\n.review .review_content .review_list .rv_content[data-v-76421fee] {\n        color: #212121;\n        line-height: .81067rem;\n        font-size: .59733rem;\n}\n.review .review_content .review_list[data-v-76421fee]:first-child {\n      border-top: none;\n}\n.review .review_download[data-v-76421fee] {\n    display: block;\n    margin: .128rem .512rem 0;\n    height: 1.536rem;\n    line-height: 1.536rem;\n    font-size: .55467rem;\n    color: #fff;\n    background-color: #fb7299;\n    border-radius: .128rem;\n    text-align: center;\n}\n.detail_footer[data-v-76421fee] {\n  padding: 1.344rem 0 1.17333rem;\n  background: #f3f3f3;\n}\n.detail_footer .footer_select[data-v-76421fee] {\n    overflow: hidden;\n}\n.detail_footer .footer_select a[data-v-76421fee] {\n      float: left;\n      height: .88267rem;\n      border-right: .02133rem solid #ccc;\n      box-sizing: border-box;\n      width: 33%;\n      text-align: center;\n}\n.detail_footer .footer_select a i[data-v-76421fee] {\n        display: inline-block;\n        margin-right: .42667rem;\n        vertical-align: middle;\n        background: url(//s1.hdslb.com/bfs/static/mult/images/ui_2.png) no-repeat;\n        background-size: 15.36rem 46.72rem;\n        overflow: hidden;\n}\n.detail_footer .footer_select a span[data-v-76421fee] {\n        font-size: .512rem;\n        line-height: .68267rem;\n        vertical-align: middle;\n}\n.detail_footer .footer_select a[data-v-76421fee]:last-child {\n      border-right: none;\n}\n.detail_footer p[data-v-76421fee] {\n    margin-top: 1.19467rem;\n    font-size: .512rem;\n    text-align: center;\n    color: #999;\n}\n", ""]);
+exports.push([module.i, "\n.showmore[data-v-76421fee] {\n  position: absolute;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  margin: auto 0;\n  width: .74667rem;\n  height: .53333rem;\n  background: url(//s1.hdslb.com/bfs/static/mult/images/ui_2.png) no-repeat;\n  background-size: 15.36rem 46.72rem;\n  background-position: -5.29067rem -6.10133rem;\n  transition: all .1s;\n}\n.showless[data-v-76421fee] {\n  position: absolute;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  margin: auto 0;\n  width: .74667rem;\n  height: .53333rem;\n  background: url(//s1.hdslb.com/bfs/static/mult/images/ui_2.png) no-repeat;\n  background-size: 15.36rem 46.72rem;\n  background-position: -5.29067rem -7.36rem;\n  transition: all .1s;\n}\n.detail_select[data-v-76421fee] {\n  width: 100%;\n}\n.detail_select ul[data-v-76421fee] {\n    display: flex;\n    padding-left: 20px;\n    border-bottom: 1px solid #ccc;\n}\n.detail_select ul li[data-v-76421fee] {\n      display: block;\n      height: 50px;\n      width: 33%;\n}\n.detail_select ul li a[data-v-76421fee] {\n        font-size: 15px;\n        color: #999;\n        display: block;\n        width: 100%;\n        height: 100%;\n        text-align: center;\n        line-height: 50px;\n        position: relative;\n}\n.detail_select ul li a img[data-v-76421fee] {\n          display: block;\n          width: 20px;\n          height: 20px;\n          position: absolute;\n          top: 16px;\n          left: 16px;\n}\n.detail_desc[data-v-76421fee] {\n  padding: .832rem .512rem 0;\n  border-bottom: .02133rem solid #ccc;\n  background: #f3f3f3;\n}\n.detail_desc h1[data-v-76421fee] {\n    margin: 0 0 .49067rem;\n    line-height: 1.024rem;\n    font-size: .64rem;\n    font-weight: 500;\n    color: #212121;\n}\n.detail_desc .view[data-v-76421fee] {\n    position: relative;\n    margin-bottom: .66933rem;\n    color: #757575;\n}\n.detail_desc .view p[data-v-76421fee] {\n      display: inline-block;\n      height: .53333rem;\n      vertical-align: middle;\n      line-height: .53333rem;\n      font-size: .512rem;\n}\n.detail_desc .descwarp[data-v-76421fee] {\n    margin-bottom: 1.024rem;\n    overflow: hidden;\n}\n.detail_desc .descwarp .desc[data-v-76421fee] {\n      line-height: .85333rem;\n      color: #757575;\n      font-size: .512rem;\n}\n.detail_desc .descwarp .src[data-v-76421fee] {\n      margin-top: .768rem;\n      font-size: .512rem;\n      color: #999;\n}\n.detail_desc .descwarp .src a[data-v-76421fee] {\n        float: left;\n        color: #fb7299;\n        font-size: .512rem;\n        margin-right: .21333rem;\n}\n.detail_desc .descwarp .src a[data-v-76421fee]::after {\n        display: inline-block;\n        margin-left: .21333rem;\n        font-size: .512rem;\n        content: \">\";\n        color: #ccc;\n}\n.detail_desc .showdesc[data-v-76421fee] {\n    transition: all .5s;\n    height: .85333rem;\n}\n.author[data-v-76421fee] {\n  position: relative;\n  padding: .68267rem 0 .68267rem 2.64533rem;\n  min-height: 1.70667rem;\n  border-bottom: .02133rem solid #ccc;\n  background-color: #f3f3f3;\n}\n.author .author_face[data-v-76421fee] {\n    position: absolute;\n    left: .512rem;\n    width: 1.70667rem;\n    height: 1.70667rem;\n    border-radius: .85333rem;\n    border: .02133rem solid #ccc;\n    overflow: hidden;\n}\n.author .author_face img[data-v-76421fee] {\n      width: 100%;\n      height: 100%;\n}\n.author .author_name[data-v-76421fee] {\n    display: block;\n    min-width: 4.69333rem;\n    margin-top: .17067rem;\n    line-height: .59733rem;\n    font-size: .59733rem;\n    color: #212121;\n}\n.author span[data-v-76421fee] {\n    margin-top: .384rem;\n    display: block;\n    line-height: .512rem;\n    font-size: .512rem;\n    color: #999;\n}\n.author .attention[data-v-76421fee] {\n    position: absolute;\n    margin: auto 0;\n    top: 0;\n    bottom: 0;\n    right: .512rem;\n    width: 3.072rem;\n    height: 1.28rem;\n    border-radius: .17067rem;\n    text-align: center;\n    font-size: .55467rem;\n    line-height: 1.28rem;\n    color: #fb7299;\n    border: .04267rem solid #fb7299;\n    background-color: #fff;\n}\n.partbox[data-v-76421fee] {\n  position: relative;\n  background-color: #f3f3f3;\n  width: 93.4%;\n  padding: .68267rem 3.2% 0;\n  border-bottom: .02133rem solid #ccc;\n  overflow: hidden;\n}\n.partbox .partTop[data-v-76421fee] {\n    position: relative;\n    width: 100%;\n    margin-bottom: .896rem;\n}\n.partbox .partTop span[data-v-76421fee] {\n      font-size: .64rem;\n      line-height: .64rem;\n      color: #212121;\n      text-align: left;\n}\n.partbox .partcontent[data-v-76421fee] {\n    position: relative;\n    width: 100%;\n    overflow: hidden;\n    margin-bottom: .896rem;\n}\n.partbox .partcontent .partc[data-v-76421fee] {\n      display: block;\n      width: 25%;\n      height: 50px;\n      position: relative;\n      float: left;\n      width: 5.09867rem;\n      height: 2.73067rem;\n      border: .04267rem solid #fb7299;\n      border-radius: .42667rem;\n      margin-right: .42667rem;\n      background-color: #fff;\n}\n.partbox .partcontent .partc p[data-v-76421fee] {\n        position: absolute;\n        top: 50%;\n        left: 50%;\n        width: 4.26667rem;\n        transform: translate(-50%, -50%);\n        -webkit-transform: translate(-50%, -50%);\n        color: #fb7299;\n        font-size: .512rem;\n        line-height: .768rem;\n        text-align: center;\n}\n.relatedtag[data-v-76421fee] {\n  padding: 1.024rem 0 .384rem .512rem;\n  border-bottom: .02133rem solid #ccc;\n  color: #212121;\n  background-color: #f3f3f3;\n  overflow: hidden;\n}\n.relatedtag h3[data-v-76421fee] {\n    margin-bottom: .85333rem;\n    font-weight: 400;\n    font-size: .64rem;\n}\n.relatedtag a[data-v-76421fee] {\n    float: left;\n    display: block;\n    margin: 0;\n    padding: 0;\n    text-decoration: none;\n    margin-bottom: .512rem;\n    margin-right: .42667rem;\n    padding: .40533rem .68267rem;\n    font-size: .55467rem;\n    border: .02133rem solid #ccc;\n    border-radius: .68267rem;\n    color: #505050;\n    background-color: #fff;\n    text-align: center;\n}\n.relatedvideo[data-v-76421fee] {\n  padding: 1.024rem 0 0;\n  background-color: #f3f3f3;\n}\n.relatedvideo h3[data-v-76421fee] {\n    padding-left: .512rem;\n    margin-bottom: .42667rem;\n    font-size: .64rem;\n    font-weight: 400;\n}\n.relatedvideo .relatedid .videolist[data-v-76421fee] {\n    padding: 0 .512rem;\n}\n.relatedvideo .relatedid .videolist a[data-v-76421fee] {\n      display: block;\n      position: relative;\n      padding: .42667rem 0 .42667rem 5.504rem;\n      height: 3.61467rem;\n      overflow: hidden;\n      border-top: .02133rem solid #ccc;\n}\n.relatedvideo .relatedid .videolist a .list_pic[data-v-76421fee] {\n        position: absolute;\n        top: .42667rem;\n        left: 0;\n        width: 4.992rem;\n        height: 3.11467rem;\n        border-radius: .128rem;\n        overflow: hidden;\n}\n.relatedvideo .relatedid .videolist a .list_pic img[data-v-76421fee] {\n          width: 100%;\n          height: 100%;\n}\n.relatedvideo .relatedid .videolist a .list_content .list_title[data-v-76421fee] {\n        display: block;\n        margin-bottom: 9px;\n        max-height: 1.536rem;\n        line-height: .968rem;\n        font-size: .59733rem;\n        color: #212121;\n}\n.relatedvideo .relatedid .videolist a .list_content .list_author[data-v-76421fee] {\n        display: block;\n        margin-bottom: 6px;\n        line-height: .68267rem;\n        font-size: .512rem;\n        color: #757575;\n}\n.relatedvideo .relatedid .videolist a .list_content .list_view[data-v-76421fee] {\n        line-height: .68267rem;\n        font-size: .512rem;\n        color: #757575;\n}\n.relatedvideo .relatedid .videolist a .list_content .list_view span[data-v-76421fee] {\n          float: left;\n          width: 50%;\n}\n.relatedvideo .relatedid .loadmore[data-v-76421fee] {\n    margin-top: .512rem;\n    width: 100%;\n    line-height: 1.728rem;\n    font-size: .55467rem;\n    color: #fb7299;\n    background-color: #e7e7e7;\n    text-align: center;\n}\n.review[data-v-76421fee] {\n  padding-top: 1.024rem;\n  background-color: #f3f3f3;\n}\n.review h3[data-v-76421fee] {\n    margin-bottom: .08533rem;\n    margin-left: .512rem;\n    font-size: .64rem;\n    font-weight: 400;\n}\n.review .review_content[data-v-76421fee] {\n    padding: 0 .512rem;\n}\n.review .review_content .review_list[data-v-76421fee] {\n      position: relative;\n      padding: .768rem 0 .66133rem 2.13333rem;\n      min-height: 1.70667rem;\n      border-top: .02133rem solid #ccc;\n      overflow: hidden;\n}\n.review .review_content .review_list .rv_pic[data-v-76421fee] {\n        position: absolute;\n        width: 1.70667rem;\n        height: 1.70667rem;\n        top: .768rem;\n        left: 0;\n        border-radius: 50%;\n        overflow: hidden;\n}\n.review .review_content .review_list .rv_pic img[data-v-76421fee] {\n          width: 100%;\n          height: 100%;\n}\n.review .review_content .review_list .rv_name[data-v-76421fee] {\n        display: block;\n        max-width: 60%;\n        margin-bottom: .512rem;\n        color: #757575;\n        font-size: .55467rem;\n}\n.review .review_content .review_list .rv_time[data-v-76421fee] {\n        position: absolute;\n        top: .81067rem;\n        right: 0;\n        font-size: .46933rem;\n        color: #999;\n}\n.review .review_content .review_list .rv_content[data-v-76421fee] {\n        color: #212121;\n        line-height: .81067rem;\n        font-size: .59733rem;\n}\n.review .review_content .review_list[data-v-76421fee]:first-child {\n      border-top: none;\n}\n.review .review_download[data-v-76421fee] {\n    display: block;\n    margin: .128rem .512rem 0;\n    height: 1.536rem;\n    line-height: 1.536rem;\n    font-size: .55467rem;\n    color: #fff;\n    background-color: #fb7299;\n    border-radius: .128rem;\n    text-align: center;\n}\n.detail_footer[data-v-76421fee] {\n  padding: 1.344rem 0 1.17333rem;\n  background: #f3f3f3;\n}\n.detail_footer .footer_select[data-v-76421fee] {\n    overflow: hidden;\n}\n.detail_footer .footer_select a[data-v-76421fee] {\n      float: left;\n      height: .88267rem;\n      border-right: .02133rem solid #ccc;\n      box-sizing: border-box;\n      width: 33%;\n      text-align: center;\n}\n.detail_footer .footer_select a i[data-v-76421fee] {\n        display: inline-block;\n        margin-right: .42667rem;\n        vertical-align: middle;\n        background: url(//s1.hdslb.com/bfs/static/mult/images/ui_2.png) no-repeat;\n        background-size: 15.36rem 46.72rem;\n        overflow: hidden;\n}\n.detail_footer .footer_select a span[data-v-76421fee] {\n        font-size: .512rem;\n        line-height: .68267rem;\n        vertical-align: middle;\n}\n.detail_footer .footer_select a[data-v-76421fee]:last-child {\n      border-right: none;\n}\n.detail_footer p[data-v-76421fee] {\n    margin-top: 1.19467rem;\n    font-size: .512rem;\n    text-align: center;\n    color: #999;\n}\n", ""]);
 
 // exports
 
@@ -24161,147 +24161,22 @@ exports.push([module.i, "\n.showmore[data-v-76421fee] {\n  position: absolute;\n
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+var _vueAwesomeSwiper = __webpack_require__(7);
 
 exports.default = {
+	updated: function updated() {
+		console.log('更新');
+		if (this.isjump) {
+			this.page = 0;
+			this.showMsg();
+			this.isjump = false;
+			document.body.scrollTop = 0;
+			console.log('渲染成功');
+		}
+	},
 	mounted: function mounted() {
-		var _this = this;
-
+		console.log('初始');
 		var swiper = new Swiper('.swiper-container', {
 			observer: true, //修改swiper自己或子元素时，自动初始化swiper
 			observeParents: true //修改swiper的父元素时，自动初始化swiper
@@ -24311,44 +24186,13 @@ exports.default = {
 		//detail/?id=1
 		// console.log(this.$route.query)
 		this.aid = this.$route.params.aid;
-
-		//相关视频
-		var xml = new XMLHttpRequest();
-		xml.open('GET', "https://comment.bilibili.com/recommendnew," + this.aid, true);
-		xml.send();
-		xml.onreadystatechange = function () {
-			if (xml.readyState == 4 && (xml.status == 200 || xml.status == 304)) {
-				var data = JSON.parse(xml.responseText).data;
-				// console.log(data)
-				this.list = data;
-				this.loadmore();
-			}
-		}.bind(this);
-
-		this.$ajax.get('http://localhost:12345/detail', {
-			params: {
-				aid: this.aid
-			}
-		}).then(function (response) {
-			var data = response.data[0];
-			console.log(data);
-			//如果数据库中存在就更换数据，否则用回默认
-			if (data) {
-				_this.title = data.title;
-				_this.desc = data.descri;
-				_this.view = JSON.parse(data.stat).view;
-				_this.danmaku = JSON.parse(data.stat).danmaku;
-				_this.tname = data.tname;
-				_this.author = JSON.parse(data.owner).name;
-				_this.author_face = JSON.parse(data.owner).face;
-			}
-		}).catch(function (error) {
-			console.log(error);
-		});
+		this.showMsg();
 	},
 	data: function data() {
 		return {
-			swiperOption: '',
+			swiperOption: {
+				width: 90
+			},
 			isshowdesc: true,
 			aid: '',
 			title: "【fate】全英灵从者资料合集·17年夏",
@@ -24357,14 +24201,16 @@ exports.default = {
 			desc: "终于完成了~~~花费时间实在太长~~视频一共分为12P。欧洲6组，亚洲4组，最后加上美洲非洲，月球。别问我为何分P那么多，实在是因为内存需求太大了！这已经是极限分P了（哭~）最后，视频内容如果错误不大，修正就放在下次更新吧，下次更新——会是什么时候呢？",
 			tname: "综合",
 			author: "光之主",
+			pubdate: "1500853582",
 			author_face: "//i1.hdslb.com/bfs/face/b2963d6a16c785d80b57adef8c046aae4f927dfb.jpg",
-			partc: ['a', 'b', 'c', 'd', 'e', 'a', 'b', 'c', 'd', 'e'],
+			partc: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'],
 			tags: ["型月", "fate", "英灵", "fate grand order", "fgo", "fate extra", "fate zero", "fate全系列", "fate prototype"],
 			//加载
 			list: [],
 			visiblelist: [],
 			page: 0,
 			isload: '刚刚看到这里，点击加载更多~',
+			isjump: false,
 			//评论
 			reviews: [{
 				rv_pic: "//i1.hdslb.com/bfs/face/8d24da56f5c69f910f7484e91a04c9aff4eaedf4.jpg@80w_80h.webp",
@@ -24421,18 +24267,239 @@ exports.default = {
 					clearInterval(timer);
 				}
 			}, 50);
+		},
+
+		//页面渲染
+		showMsg: function showMsg() {
+			var _this = this;
+
+			// this.aid = this.$route.params.aid;
+			//相关视频
+			var xml = new XMLHttpRequest();
+			xml.open('GET', "https://comment.bilibili.com/recommendnew," + this.aid, true);
+			xml.send();
+			xml.onreadystatechange = function () {
+				if (xml.readyState == 4 && (xml.status == 200 || xml.status == 304)) {
+					var data = JSON.parse(xml.responseText).data;
+					// console.log(data)
+					this.list = data;
+					this.loadmore();
+				}
+			}.bind(this);
+
+			try {
+
+				this.$ajax.get('http://localhost:12345/detail', {
+					params: {
+						aid: this.aid
+					}
+				}).then(function (response) {
+					console.log('使用数据库的数据');
+					var data = response.data[0];
+					// console.log(data.ctime);
+					//如果数据库中存在就更换数据，否则用回默认
+					if (data) {
+						_this.title = data.title;
+						_this.desc = data.descri;
+						_this.view = JSON.parse(data.stat).view;
+						_this.danmaku = JSON.parse(data.stat).danmaku;
+						_this.tname = data.tname;
+						_this.author = JSON.parse(data.owner).name;
+						_this.author_face = JSON.parse(data.owner).face;
+						//计算投递时间 改为过滤器计算
+						// var pd = data.pubdate;
+						// var nd = new Date().getTime()/1000;
+						// var sd = nd-pd
+						// var oneDay = 60*60*24;
+						// this.pubdate = Math.floor(sd/oneDay);
+						_this.pubdate = data.pbudate;
+					}
+				}).catch(function (error) {
+					console.log(error);
+				});
+			} catch (err) {
+				console.log(err);
+			}
+		},
+		jump: function jump(aid, title, name, view, danmaku) {
+			console.log('jump');
+			this.isjump = true;
+			this.aid = aid;
+			this.title = title;
+			this.author = name;
+			this.view = view;
+			this.danmaku = danmaku;
 		}
 	},
-	//浏览或弹幕数超过1w则四舍五入
+
 	filters: {
+		//浏览或弹幕数超过1w则四舍五入
+		//计算弹幕数和浏览数
 		showview: function showview(input) {
 			if (input > 10000) {
 				return (input / 10000).toFixed(1) + '万';
 			}
 			return input;
+		},
+
+		//计算投递日期
+		showtime: function showtime(input) {
+			var pd = input;
+			var nd = new Date().getTime() / 1000;
+			var sd = nd - pd;
+			var oneDay = 60 * 60 * 24;
+			var days = Math.floor(sd / oneDay);
+			if (days > 30 && days < 365) {
+				var day = Math.floor(days / 30) + '月';
+				return day;
+			} else if (days > 365) {
+				var day = Math.floor(days / 365) + '年';
+				return day;
+			} else if (days < 1) {
+				var hour = Math.floor(sd / 60 * 60) + '小时';
+				return hour;
+			} else if (days > 1 && days < 30) {
+				return days + '天';
+			}
 		}
 	}
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 /* 93 */
@@ -24467,28 +24534,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("\n\t\t\t\t\t主页\n\t\t\t\t")]), _vm._v(" "), _c('a', [_vm._v("\n\t\t\t\t\t动画\n\t\t\t\t")]), _vm._v(" "), _c('a', [_vm._v("\n\t\t\t\t\t" + _vm._s(_vm.tname) + "\n\t\t\t\t")]), _vm._v(" "), _c('span', [_vm._v("av" + _vm._s(_vm.aid))])])])]), _vm._v(" "), _c('div', {
     staticClass: "author"
-  }, [_c('a', {
-    staticClass: "author_face",
-    attrs: {
-      "href": ""
-    }
-  }, [_c('img', {
-    attrs: {
-      "src": _vm.author_face
-    }
-  })]), _vm._v(" "), _c('a', {
+  }, [_vm._m(1), _vm._v(" "), _c('a', {
     staticClass: "author_name",
     attrs: {
       "href": ""
     }
-  }, [_vm._v(_vm._s(_vm.author))]), _vm._v(" "), _c('span', [_vm._v("两天前投递")]), _vm._v(" "), _c('a', {
+  }, [_vm._v(_vm._s(_vm.author))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm._f("showtime")(_vm.pubdate)) + "前投递")]), _vm._v(" "), _c('a', {
     staticClass: "attention",
     attrs: {
       "href": ""
     }
   }, [_vm._v("关注")])]), _vm._v(" "), _c('div', {
     staticClass: "partbox"
-  }, [_vm._m(1), _vm._v(" "), _c('div', {
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "partcontent"
   }, [_c('swiper', {
     ref: "mySwiper",
@@ -24498,7 +24556,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.partc), function(i) {
     return _c('swiper-slide', [_c('a', {
       staticClass: "partc"
-    }, [_c('p', [_vm._v(_vm._s(i))])])])
+    }, [_c('p', [_vm._v("选集" + _vm._s(i))])])])
   }))], 1)]), _vm._v(" "), _c('div', {
     staticClass: "relatedtag"
   }, [_c('h3', [_vm._v("相关标签")]), _vm._v(" "), _vm._l((_vm.tags), function(tag) {
@@ -24514,7 +24572,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "videolist"
   }, _vm._l((_vm.visiblelist), function(li) {
-    return _c('a', [_vm._m(2, true), _vm._v(" "), _c('div', {
+    return _c('a', {
+      attrs: {
+        "href": '#/detail/' + li.aid
+      },
+      on: {
+        "click": function($event) {
+          _vm.jump(li.aid, li.title, li.owner.name, li.stat.view, li.stat.danmaku)
+        }
+      }
+    }, [_vm._m(3, true), _vm._v(" "), _c('div', {
       staticClass: "list_content"
     }, [_c('span', {
       staticClass: "list_title"
@@ -24537,7 +24604,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.reviews), function(rv) {
     return _c('div', {
       staticClass: "review_list"
-    }, [_vm._m(3, true), _vm._v(" "), _c('a', {
+    }, [_vm._m(4, true), _vm._v(" "), _c('a', {
       staticClass: "rv_name"
     }, [_vm._v(_vm._s(rv.rv_name))]), _vm._v(" "), _c('span', {
       staticClass: "rv_time"
@@ -24550,7 +24617,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "detail_footer"
   }, [_c('div', {
     staticClass: "footer_select"
-  }, [_vm._m(4), _vm._v(" "), _vm._m(5), _vm._v(" "), _c('a', {
+  }, [_vm._m(5), _vm._v(" "), _vm._m(6), _vm._v(" "), _c('a', {
     on: {
       "click": function($event) {
         _vm.toTop()
@@ -24579,6 +24646,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "src": "//s1.hdslb.com/bfs/static/mult/images/download.png"
     }
   }), _vm._v("\n\t\t\t\t\t缓存\n\t\t\t\t")])])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
+    staticClass: "author_face",
+    attrs: {
+      "href": ""
+    }
+  }, [_c('img', {
+    attrs: {
+      "src": ""
+    }
+  })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "partTop"
@@ -24692,7 +24770,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _xheader = __webpack_require__(7);
+var _xheader = __webpack_require__(8);
 
 var _xheader2 = _interopRequireDefault(_xheader);
 
