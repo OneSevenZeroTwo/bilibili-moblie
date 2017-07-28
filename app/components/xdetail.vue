@@ -104,7 +104,8 @@
 			<div class="review_content">
 				<div class="review_list" v-for="rv in reviews">
 					<a class="rv_pic">
-						<img :src="rv.rv_pic">
+						<!-- <img :src="rv.rv_pic"> -->
+						<img src="">
 					</a>
 					<a class="rv_name">{{rv.rv_name}}</a>
 					<span class="rv_time">{{rv.rv_time}}</span>
