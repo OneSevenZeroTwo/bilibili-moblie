@@ -43,7 +43,10 @@ app.post('/register',function(req,res){
 	});
 	res.append("Access-Control-Allow-Origin", "*")
 })
-
+app.get('/ss',function(req,res){
+	res.append("Access-Control-Allow-Origin", "*");
+	res.send('请求成功')
+})
 app.post('/test',function(req,res){
 	res.append("Access-Control-Allow-Origin", "*");
 	console.log(req.body);
@@ -74,6 +77,66 @@ app.post('/login',function(req,res){
 	});
 	res.append("Access-Control-Allow-Origin", "*")
 })
+
+
+//存入收藏--------------------------
+app.post('/collect', function(req, res) {
+	createConnection();
+	connection.connect();
+	var msgId = req.body.msgId;
+	var username = req.body.username;
+	console.log(msgId,username,688888888)
+	connection.query(`select msgId from usermsg where username = '${username}';`, function(error, results, fields){
+		if(error) throw error;
+		console.log(results[0].msgId);
+		var str = results[0].msgId;
+		if(str.length>=1){
+			str += ','+msgId;
+		}else{
+			str = msgId;
+		}		
+		console.log(str);
+		connection.query(`update usermsg set msgId = '${str}' where username = '${username}';`,function(error, results, fields){
+			if(error) throw error;
+			res.send('收藏成功');
+		})
+	})
+	res.append("Access-Control-Allow-Origin", "*")
+})
+
+
+// 收藏页---------------------------
+app.post('/collectlist', function(req, res) {
+	createConnection();
+	connection.connect();
+	var username = req.body.username;
+	connection.query(`select msgId from usermsg where username = '${username}';`, function(error, results, fields){
+		if(error) throw error;
+		// console.log(results[0].msgId);
+		if(!results[0].msgId){
+			res.send('nonono');		
+		}else{			
+			/*var arr = results[0].msgId.split(',');
+			// 去重
+			for(var i=0;i<arr.length;i++){
+				for(var j=i+1;j<arr.length;j++){
+					if(arr[i] == arr[j]){
+						arr.splice(j--,1)
+					}
+				}
+			}*/
+			var str = '('+results[0].msgId+')';
+			// console.log(str);
+			// select * from usermsg where id in (1,2,5,7,9);若有重复会自动剔除不会显示两次
+			connection.query(`select * from lagou where id in ${str};`,function(error, results, fields){
+				if(error) throw error;
+				res.send(results);
+			});
+		}
+	})
+	res.append("Access-Control-Allow-Origin", "*")	
+})
+
 
 // 监听----------------------------------------------
 var server = app.listen(666, function() {

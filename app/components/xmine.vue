@@ -53,8 +53,10 @@
 		</footer>
 	</div>
 </template>
-
+<!-- <link rel="stylesheet" href="https://static.hdslb.com/mobile/css/normalize.css"> -->
 <style scoped lang="css">
+	@import 'https://static.hdslb.com/mobile/css/normalize.css';
+	@import 'https://static.hdslb.com/mobile/css/mobile.css';
 	body,html{
 		background:#f4f4f4;
 	}
