@@ -1,7 +1,7 @@
 <template>
 	<div class="weui-panel weui-panel_access">
 		<div class="weui-panel__bd">
-			<a class="index__item__src-ranking-board-item-" :href="'#/detail/'+index" v-for="(n,index) in news">
+			<a class="index__item__src-ranking-board-item-" v-for="(n,index) in news" :href="'#/detail/'+n.aid">
 				<div class="index__leftMark__src-ranking-board-item-" v-if="index<3">
 					<xcontent :Imgurl="Img[index]"></xcontent>
 				</div>
@@ -29,12 +29,6 @@
 			<div @click="goTop()" class="index__toTop__src-ranking-board-" data-reactid="45" style="display: block;"><img src="http://s1.hdslb.com/bfs/static/mult/images/toTop1.png" alt="" data-reactid="46"></div>
 		</div>
 		<span @click="loadMore()" class="index__downLoadBtn__src-ranking-board-">点击查看更多</span>
-		<!--<div class="weui-panel__ft" v-show="isLoadMore">
-			<a href="javascript:void(0);" @click="loadMore()" class="weui-cell weui-cell_access weui-cell_link">
-				<div class="weui-cell__bd">查看更多</div>
-				<span class="weui-cell__ft"></span>
-			</a>
-		</div>-->
 	</div>
 </template>
 <script>
@@ -56,8 +50,7 @@
 				return this.$store.state.Img
 			},
 			images() {
-				console.log(this.$route.path.slice(6))
-				console.log(this.$store.state.Ranks)
+//				console.log(this.$route.path.slice(6))
 				return this.$store.state.images
 			},
 			
@@ -65,7 +58,9 @@
 		methods: {
 			setrans() {
 				console.log(this)
-				this.$store.dispatch("setRank",this.$route.path.slice(6))
+				this.$store.state.rout=this.$route.path.slice(6),
+				this.$store.state.Ranks=[]
+				this.$store.dispatch("setRank")
 			},
 			loadMore() {
 				this.$store.state.list=this.$store.state.list+20
@@ -77,11 +72,22 @@
 						clearInterval(timer)
 					}
 				}, 1)
-			}
+			},
 		},
 		mounted() {
+			console.log(this.$http.jsonp,this.$route.path.slice(6))
 			this.setrans();
-			console.log(this.$http)
+//			this.$http.jsonp("http://api.bilibili.com/x/web-interface/ranking?day=3&jsonp=jsonp", {
+//				params: {
+//					rid:this.$store.state.rout,
+//				}
+//			}).then((data) => {
+//				this.$store.state.Ranks = this.$store.state.Ranks.concat(data.data.data.list),
+////				state.images=state.images.concat(data.data.data.list.pic)
+//				console.log(this.$store.state.Ranks)
+//			}, (err) => {
+//
+//			})
 
 		},
 		filters: {
