@@ -8,7 +8,7 @@
 				</use>
 			</svg>
 		</a>
-		<a class="index__mySpace__src-home-topArea-" href="//m.bilibili.com/space.html" data-reactid="8"></a>
+		<a class="index__mySpace__src-home-topArea-" href="#/mine/user" data-reactid="8"></a>
 		<a class="index__downloadBtn__src-home-topArea-" data-reactid="9">
 			<p data-reactid="10">客户端</p>
 		</a>

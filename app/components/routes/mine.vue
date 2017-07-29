@@ -18,13 +18,13 @@
 						<a href="#/index" title="首页">首页</a>
 					</li>
 					<li class="nav-item nav-channel">
-						<a href="//m.bilibili.com/channel.html" title="频道">频道</a>
+						<a href="#/channel" title="频道">频道</a>
 					</li>
 					<li class="nav-item nav-live">
 						<a href="//live.bilibili.com/h5/" title="直播">直播</a>
 					</li>
 					<li class="nav-item nav-rank">
-						<a href="//m.bilibili.com/ranking.html" title="排行">排行</a>
+						<a href="#/Rank" title="排行">排行</a>
 					</li>
 					<li class="nav-item nav-space on">
 						<a href="#/mine/user" title="我的">我的</a>
