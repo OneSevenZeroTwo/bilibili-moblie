@@ -31,6 +31,10 @@ import Rank from "./components/routes/Rank.vue";
 import mine from "./components/routes/mine.vue";
 import login from "./components/routes/login.vue";
 import register from "./components/routes/register.vue";
+import xmine from "./components/xmine.vue";
+import xfav from "./components/xfav.vue";
+import xmyPost from "./components/xmyPost.vue";
+import xhistory from "./components/xhistory.vue";
 
 var router = new VueRouter({
 	routes: [{
@@ -49,16 +53,19 @@ var router = new VueRouter({
 		},{
 			path:'/mine',
 			component:mine,
-			/*children:[{
-				path:'fav',
-				component:
+			children:[{
+				path:'user',
+				component:xmine
 			},{
-				path:'userPost',
-				component:
+				path:'fav',
+				component:xfav
+			},{
+				path:'myPost',
+				component:xmyPost
 			},{
 				path:'history',
-				component:
-			}]*/
+				component:xhistory
+			}]
 		},{
 			path:'/login',
 			component:login

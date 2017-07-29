@@ -2,7 +2,7 @@
 
 	<div class="wrapper">
 		<!--[CDATA[YII-BLOCK-BODY-BEGIN]]-->
-		<div class="flex-bar main">
+		<!-- <div class="flex-bar main">
 			<ul class="flex-bar-in">
 				<li class="nav-item nav-index">
 					<a href="//m.bilibili.com/index.html" title="首页">首页</a>
@@ -20,7 +20,7 @@
 					<a href="//m.bilibili.com/space.html" title="我的">我的</a>
 				</li>
 			</ul>
-		</div>
+		</div> -->
 		<div class="user-wrapper">
 			<div class="user-avatar"><img src="//static.hdslb.com/mobile/img/default_avatar.png" alt="默认头像"></div>
 			<div class="user-info">
@@ -30,11 +30,11 @@
 		</div>
 		<div class="act-wrapper">
 			<ul>
-				<li v-show="userShow"><a class="act-item act-item-fav" href="#/fav"><i class="bili-icon-fav"></i><span class="act-name">我的收藏</span><i class="bili-icon-arrow"></i></a>
+				<li v-show="userShow"><a class="act-item act-item-fav" href="#/mine/fav"><i class="bili-icon-fav"></i><span class="act-name">我的收藏</span><i class="bili-icon-arrow"></i></a>
 				</li>
-				<li v-show="userShow"><a class="act-item" href="#/myPost"><i class="bili-icon-upload"></i><span class="act-name">我的投稿</span><i class="bili-icon-arrow"></i></a></li>
+				<li v-show="userShow"><a class="act-item" href="#/mine/myPost"><i class="bili-icon-upload"></i><span class="act-name">我的投稿</span><i class="bili-icon-arrow"></i></a></li>
 				<li>
-					<a class="act-item" href="#/history"><i class="bili-icon-history-2"></i><span class="act-name">历史记录</span><i class="bili-icon-arrow"></i></a>
+					<a class="act-item" href="#/mine/history"><i class="bili-icon-history-2"></i><span class="act-name">历史记录</span><i class="bili-icon-arrow"></i></a>
 				</li>
 			</ul>
 			<p v-show="!userShow" class="act-tooltip">登陆后可以同步播放记录哦～</p>
@@ -49,7 +49,7 @@
 
 		</div>
 		<!--[CDATA[YII-BLOCK-BODY-END]]-->
-		<footer>
+		<!-- <footer>
 			<p class="clearfix">
 				<a id="change_to_computer" href="javascript:void(0)" class="bottom-btn"><i class="icons icons-computer"></i><span>电脑版</span></a>
 				<a id="link_to_app" href="bilibili://" class="bottom-btn" target="_self"><i class="icons icons-app"></i>客户端</a>
@@ -57,14 +57,14 @@
 			</p>
 			<p>哔哩哔哩 沪ICP备13002172号-3</p>
 			<p>信息网络传播视听节目许可证：<span>0910417</span></p>
-		</footer>
+		</footer> -->
 	</div>
 </template>
 
 <style scoped lang="css">
-	@import 'https://static.hdslb.com/mobile/css/normalize.css';
-	@import 'https://static.hdslb.com/mobile/css/mobile.css';
-	body,html{
+	/* @import 'https://static.hdslb.com/mobile/css/normalize.css';
+	@import 'https://static.hdslb.com/mobile/css/mobile.css'; */
+	/* body,html{
 		background:#f4f4f4;
 	}
 	footer p{
@@ -74,7 +74,7 @@
 	    position: relative;
 	    padding-top: 2px;
 	    overflow-x: hidden;
-	}
+	} */
 </style>
 
 <script>
