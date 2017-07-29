@@ -10,8 +10,8 @@
 					</a>
 				</li>
 				<li>
-					<a>
-						<img src="//s1.hdslb.com/bfs/static/mult/images/collect.png">
+					<a @click="collect()">
+						<i :class="{'collect':!iscollected,'collected':iscollected}"></i>
 						收藏
 					</a>
 				</li>
@@ -74,7 +74,7 @@
 		</div>
 		<div class="relatedtag">
 			<h3>相关标签</h3>
-			<a href="" v-for="tag in tags">{{tag}}</a>
+			<a v-for="tag in tags">{{tag}}</a>
 		</div>
 		<div class="relatedvideo">
 			<h3>相关视频</h3>
@@ -170,6 +170,7 @@
 					width:90,
 				},
 				isshowdesc:true,
+				iscollected:false,
 				aid:'',
 				title:"【fate】全英灵从者资料合集·17年夏",
 				view:"61234",
@@ -221,6 +222,7 @@
 			showdesc(){
 				this.isshowdesc = !this.isshowdesc;
 			},
+
 			loadmore(){
 				this.page++;
 				var p = this.page;
@@ -233,6 +235,7 @@
 					this.isload = '没有更多了-去客户端看看？'
 				}
 			},
+
 			toTop(){
 				var timer = setInterval(function(){
 					var top = document.body.scrollTop
@@ -243,6 +246,7 @@
 					}
 				},50)
 			},
+
 			//页面渲染
 			showMsg(){
 				// this.aid = this.$route.params.aid;
@@ -267,11 +271,11 @@
 					    }
 					})
 					.then((response) => {
-						console.log('使用数据库的数据');
 						var data = response.data[0];
 						// console.log(data.ctime);
 						//如果数据库中存在就更换数据，否则用回默认
 						if(data){
+							console.log('使用数据库的数据');
 							this.title = data.title;
 							this.desc = data.descri;
 							this.view = JSON.parse(data.stat).view;
@@ -285,7 +289,7 @@
 							// var sd = nd-pd
 							// var oneDay = 60*60*24;
 						 	// this.pubdate = Math.floor(sd/oneDay);
-							this.pubdate = data.pbudate;
+							this.pubdate = data.pubdate;
 						}
 					})
 					.catch((error) => {
@@ -307,6 +311,14 @@
 				this.view = view;
 				this.danmaku = danmaku;
 			},
+
+			collect(){
+				this.iscollected = !this.iscollected;
+				if(this.iscollected){
+					console.log(123);
+					this.$ajax.get()
+				}
+			}
 		},
 
 		filters:{
@@ -320,7 +332,7 @@
 			},
 			//计算投递日期
 			showtime(input){
-				var pd = input
+				var pd = input;
 				var nd = new Date().getTime()/1000;
 				var sd = nd-pd
 				var oneDay = 60*60*24;
@@ -370,6 +382,26 @@
 		    background-size: 15.36rem 46.72rem;
 		    background-position: -5.29067rem -7.36rem;
 		    transition: all .1s;
+	}
+	.collect{
+		display:block;
+		width:20px;
+		height:20px;
+		position: absolute;
+	    top: 16px;
+	    left: 16px;
+        background-image: url(//static.hdslb.com/images/base/anim-collect.png);
+  	    background-position: -20px -20px;
+	}
+	.collected{
+		display:block;
+		width:20px;
+		height:20px;
+		position: absolute;
+	    top: 16px;
+	    left: 16px;
+        background-image: url(//static.hdslb.com/images/base/anim-collect.png);
+  	    background-position: -20px -140px;
 	}
 	.detail_select{
 		width:100%;
@@ -588,6 +620,11 @@
 		    color: #505050;
 		    background-color: #fff;
 		    text-align: center;
+		    transition: all 0.5s;
+	    }
+	    a:hover{
+	    	background-color: #fb7299;
+	    	color: #fff;
 	    }
 	}
 	.relatedvideo{

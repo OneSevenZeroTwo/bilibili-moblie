@@ -91,7 +91,8 @@ app.post('/collect', function(req, res) {
 		console.log(results[0].msgId);
 		var str = results[0].msgId;
 		console.log(str);
-		if(str.length>=1){
+		// if(str.length>=1){
+		if(str){
 			str += ','+msgId;
 		}else{
 			str = msgId;
