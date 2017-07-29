@@ -30,6 +30,7 @@ import './css/reset.css';
 import './css/home.css';
 import './css/partition.css';
 // import './js/referrer-killer.js';
+
 //-------------------
 //引入组件
 import home from "./components/routes/home.vue";
@@ -54,6 +55,13 @@ import Rank33 from "./components/routes/Rank33.vue";
 import Rank36 from "./components/routes/Rank36.vue";
 import Rank4 from "./components/routes/Rank4.vue";
 import Rank81 from "./components/routes/Rank81.vue";
+import mine from "./components/routes/mine.vue";
+import login from "./components/routes/login.vue";
+import register from "./components/routes/register.vue";
+import xmine from "./components/xmine.vue";
+import xfav from "./components/xfav.vue";
+import xmyPost from "./components/xmyPost.vue";
+import xhistory from "./components/xhistory.vue";
 
 var router = new VueRouter({
 	routes: [{
@@ -62,6 +70,10 @@ var router = new VueRouter({
 		},{
 			path: '/Rank',
 			component: Rank
+		},
+		{
+		path: '/Rank',
+		component: Rank
 		},{
 			path: '/detail/:aid',
 			component: detail
@@ -129,6 +141,27 @@ var router = new VueRouter({
 		},{
 			path: '/Rank',
 			redirect: '/Rank/0'
+			path:'/mine',
+			component:mine,
+			children:[{
+				path:'user',
+				component:xmine
+			},{
+				path:'fav',
+				component:xfav
+			},{
+				path:'myPost',
+				component:xmyPost
+			},{
+				path:'history',
+				component:xhistory
+			}]
+		},{
+			path:'/login',
+			component:login
+		},,{
+			path:'/register',
+			component:register
 		}]
 		// （缩写）相当于 routes: routes
 });
@@ -188,6 +221,7 @@ var store = new Vuex.Store({
 				"../app/images/29.png",
 				"../app/images/30.png",]
 
+		Img: ["//s1.hdslb.com/bfs/static/mult/images/rank1.png", "//s1.hdslb.com/bfs/static/mult/images/rank2.png", "//s1.hdslb.com/bfs/static/mult/images/rank3.png"]
 	},
 	getters: {
 		getCount(state) {
@@ -215,6 +249,14 @@ var store = new Vuex.Store({
 				state.isloading=true,
 				state.Ranks = state.Ranks.concat(data.data.data.list),
 				state.images=state.images.concat(data.data.data.list.pic)
+			Vue.http.jsonp("http://api.bilibili.com/x/web-interface/ranking?rid=0&day=3&jsonp=jsonp", {
+//				params: {
+//					page: state.page++,
+//					limit: 10
+//				}
+			}).then((data) => {
+				console.log(state.Ranks)
+				state.Ranks = state.Ranks.concat(data.data.data.list)
 				console.log(state.Ranks)
 			}, (err) => {
 
@@ -264,6 +306,9 @@ var store = new Vuex.Store({
 			context.commit('setchannel')
 		}
 
+			setRank(context, data) {
+				context.commit('setRank')
+			}
 	}
 })
 
