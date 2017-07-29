@@ -12,9 +12,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 import MuseUI from 'muse-ui';
 import 'muse-ui/dist/muse-ui.css';
 
-import './css/home.css';
-import './css/reset.css';
-import './css/partition.css';
+
 Vue.use(MuseUI)
 Vue.use(Vuex);
 //通过 Vue.use()明确地安装路由功能
@@ -30,7 +28,7 @@ import "weui"
 
 import './css/reset.css';
 import './css/home.css';
-
+import './css/partition.css';
 // import './js/referrer-killer.js';
 //-------------------
 //引入组件
@@ -65,7 +63,7 @@ var router = new VueRouter({
 			path: '/Rank',
 			component: Rank
 		},{
-			path: '/detail',
+			path: '/detail/:aid',
 			component: detail
 		},{
 			path: '/search',
@@ -153,6 +151,7 @@ var store = new Vuex.Store({
 		chan:[],
 		index:"",
 		rout:"",
+		isloading:true,
 		list:20,
 		nav:[{nav:"全站",rid:0},{nav:"动画",rid:1},{nav:"番剧",rid:33},{nav:"国创",rid:167},{nav:"电影",rid:23},
 		{nav:"电视剧",rid:11},{nav:"音乐",rid:3},{nav:"舞蹈",rid:129},{nav:"游戏",rid:4},{nav:"科技",rid:36},
@@ -213,6 +212,7 @@ var store = new Vuex.Store({
 				}
 			}).then((data) => {
 				console.log(state.Ranks)
+				state.isloading=true,
 				state.Ranks = state.Ranks.concat(data.data.data.list),
 				state.images=state.images.concat(data.data.data.list.pic)
 				console.log(state.Ranks)

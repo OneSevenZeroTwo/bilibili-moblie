@@ -25,15 +25,19 @@
 						<div class="index__info__src-commonComponent-Item-">
 							<div class="index__playIcon__src-commonComponent-Item-">
 								<svg class="index__icon__src-commonComponent-Item-" aria-hidden="true">
-									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-bofangshu"></use>
+									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-bofangshu">
+                      <svg id="icon-bofangshu" viewBox="0 0 1024 1024" width="100%" height="100%"><path d="M800 128H224C134.4 128 64 198.4 64 288v448c0 89.6 70.4 160 160 160h576c89.6 0 160-70.4 160-160V288c0-89.6-70.4-160-160-160z m96 608c0 54.4-41.6 96-96 96H224c-54.4 0-96-41.6-96-96V288c0-54.4 41.6-96 96-96h576c54.4 0 96 41.6 96 96v448z"></path><path d="M684.8 483.2l-256-112c-22.4-9.6-44.8 6.4-44.8 28.8v224c0 22.4 22.4 38.4 44.8 28.8l256-112c25.6-9.6 25.6-48 0-57.6z"></path></svg>         
+                  </use>
 								</svg>
 							</div>
-							<div class="index__play__src-commonComponent-Item-">
-								<p>{{obj.stat.view}}</p>
+							<div class="index__play__src-commonComponent-Item-" style="width: 2.7rem;">
+								<p>{{obj.stat.view|num}}</p>
 							</div>
 							<div class="index__danmuIcon__src-commonComponent-Item-">
 								<svg class="index__icon__src-commonComponent-Item-" aria-hidden="true">
-									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-danmushu"></use>
+									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-danmushu">
+                    <svg id="icon-danmushu" viewBox="0 0 1024 1024" width="100%" height="100%"><path d="M800 128H224C134.4 128 64 198.4 64 288v448c0 89.6 70.4 160 160 160h576c89.6 0 160-70.4 160-160V288c0-89.6-70.4-160-160-160z m96 608c0 54.4-41.6 96-96 96H224c-54.4 0-96-41.6-96-96V288c0-54.4 41.6-96 96-96h576c54.4 0 96 41.6 96 96v448z"></path><path d="M240 384h64v64h-64zM368 384h384v64h-384zM432 576h352v64h-352zM304 576h64v64h-64z"></path></svg>
+                  </use>
 								</svg>
 							</div>
 							<div class="index__view__src-commonComponent-Item-">
@@ -72,7 +76,7 @@
         },
         images(){
           return this.$store.state.images
-        },
+        }
       },
       methods: {
         load() {
@@ -94,6 +98,14 @@
         time(input) {
           console.log(input)
           return input
+        },
+        num(input){
+          if(input<10000){
+            return input;
+          }else if(input>10000){
+            var n= Math.round((input/10000) * 10) / 10+"万";
+            return n
+          }
         }
       },
       components: {

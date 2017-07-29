@@ -1,5 +1,5 @@
 <template>
-	<div class="weui-panel weui-panel_access">
+	<div class="weui-panel weui-panel_access" v-if="isloading">
 		<div class="weui-panel__bd">
 			<a class="index__item__src-ranking-board-item-" v-for="(n,index) in news" :href="'#/detail/'+n.aid">
 				<div class="index__leftMark__src-ranking-board-item-" v-if="index<3">
@@ -30,6 +30,9 @@
 		</div>
 		<span @click="loadMore()" class="index__downLoadBtn__src-ranking-board-">点击查看更多</span>
 	</div>
+	<div v-else>
+		<img src="../images/loading.gif" alt=""  style="width: 50%; padding-top: 20%;padding-left: 25%;"/>
+	</div>
 </template>
 <script>
 	export default {
@@ -46,6 +49,9 @@
 			news() {
 				return this.$store.state.Ranks.slice(0,this.$store.state.list)
 			},
+			isloading() {
+				return this.$store.state.isloading
+			},
 			Img() {
 				return this.$store.state.Img
 			},
@@ -59,6 +65,7 @@
 			setrans() {
 				console.log(this)
 				this.$store.state.rout=this.$route.path.slice(6),
+				this.$store.state.isloading=false,
 				this.$store.state.Ranks=[]
 				this.$store.dispatch("setRank")
 			},
