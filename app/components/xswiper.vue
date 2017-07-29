@@ -23,7 +23,7 @@
 					src: require("../images/2.jpg")
 				},{
 					id: 3,
-					src: require("../images/3.png")
+					src: require("../images/5.jpg")
 				},{
 					id: 4,
 					src: require("../images/4.jpg")
@@ -38,6 +38,10 @@
 <style scoped>
 	img {
 		width: 100%;
-		height: 150px;
+		height: 100%;
 	}
+	.swiper-container {
+    
+        padding-top: 38px;
+}
 </style>
