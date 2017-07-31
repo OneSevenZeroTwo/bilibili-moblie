@@ -1,28 +1,12 @@
 <template>
-
 	<div class="wrapper">
-		<!--[CDATA[YII-BLOCK-BODY-BEGIN]]-->
-		<!-- <div class="flex-bar main">
-			<ul class="flex-bar-in">
-				<li class="nav-item nav-index">
-					<a href="//m.bilibili.com/index.html" title="首页">首页</a>
-				</li>
-				<li class="nav-item nav-channel">
-					<a href="//m.bilibili.com/channel.html" title="频道">频道</a>
-				</li>
-				<li class="nav-item nav-live">
-					<a href="//live.bilibili.com/h5/" title="直播">直播</a>
-				</li>
-				<li class="nav-item nav-rank">
-					<a href="//m.bilibili.com/ranking.html" title="排行">排行</a>
-				</li>
-				<li class="nav-item nav-space on">
-					<a href="//m.bilibili.com/space.html" title="我的">我的</a>
-				</li>
-			</ul>
-		</div> -->
 		<div class="user-wrapper">
-			<div class="user-avatar"><img src="//static.hdslb.com/mobile/img/default_avatar.png" alt="默认头像"></div>
+			<div class="user-avatar">
+				<form id="uploadForm">
+					<img :src="pic" alt="默认头像">
+					<input id="file" @change='doUpload()' type="file" name="file">
+				</form>
+			</div>
 			<div class="user-info">
 				<p class="user-name">{{uname?uname:'游客'}}</p>
 				<p class="user-coin">硬币：－</p>
@@ -30,9 +14,12 @@
 		</div>
 		<div class="act-wrapper">
 			<ul>
-				<li v-show="userShow"><a class="act-item act-item-fav" href="#/mine/fav"><i class="bili-icon-fav"></i><span class="act-name">我的收藏</span><i class="bili-icon-arrow"></i></a>
+				<li v-show="userShow">
+					<a class="act-item act-item-fav" href="#/mine/fav"><i class="bili-icon-fav"></i><span class="act-name">我的收藏</span><i class="bili-icon-arrow"></i></a>
 				</li>
-				<li v-show="userShow"><a class="act-item" href="#/mine/myPost"><i class="bili-icon-upload"></i><span class="act-name">我的投稿</span><i class="bili-icon-arrow"></i></a></li>
+				<li v-show="userShow">
+					<a class="act-item" href="#/mine/myPost"><i class="bili-icon-upload"></i><span class="act-name">我的投稿</span><i class="bili-icon-arrow"></i></a>
+				</li>
 				<li>
 					<a class="act-item" href="#/mine/history"><i class="bili-icon-history-2"></i><span class="act-name">历史记录</span><i class="bili-icon-arrow"></i></a>
 				</li>
@@ -46,67 +33,169 @@
 				<p class="reg-tooltip">据说用客户端注册可以减少答题哟～</p>
 			</div>
 			<a v-show="userShow" @click="logout()" class="account-btn">退出登录</a>
-
 		</div>
-		<!--[CDATA[YII-BLOCK-BODY-END]]-->
-		<!-- <footer>
-			<p class="clearfix">
-				<a id="change_to_computer" href="javascript:void(0)" class="bottom-btn"><i class="icons icons-computer"></i><span>电脑版</span></a>
-				<a id="link_to_app" href="bilibili://" class="bottom-btn" target="_self"><i class="icons icons-app"></i>客户端</a>
-				<a id="back_to_top" href="javascript:void(0)" class="bottom-btn"><i class="icons icons-top"></i>返回顶部</a>
-			</p>
-			<p>哔哩哔哩 沪ICP备13002172号-3</p>
-			<p>信息网络传播视听节目许可证：<span>0910417</span></p>
-		</footer> -->
+
 	</div>
 </template>
-
-<style scoped lang="css">
-	/* @import 'https://static.hdslb.com/mobile/css/normalize.css';
-	@import 'https://static.hdslb.com/mobile/css/mobile.css'; */
-	/* body,html{
-		background:#f4f4f4;
+<style>
+	#uploadForm {
+		width: 100%;
+		height: 100%;
+		position: relative;
 	}
-	footer p{
-		line-height: 2;
+	
+	#uploadForm input {
+		display: inline-block;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		opacity: 0;
 	}
-	.wrapper {
-	    position: relative;
-	    padding-top: 2px;
-	    overflow-x: hidden;
-	} */
 </style>
 
 <script>
+	// import qq from '../images/qq.jpg';
 	export default {
-		data(){
+		data() {
 			return {
-				userShow:false,
-				uname:''
+				userShow: false,
+				uname: '',
+				headPic: true,
+				pic: '//static.hdslb.com/mobile/img/default_avatar.png',
+				// pic:'uploads/qq.jpg'
 			}
 		},
-		methods:{
-			logout(){
+		methods: {
+			logout() {
 				var now = new Date();
-				now.setDate(now.getDate()-1);
+				now.setDate(now.getDate() - 1);
 				now = now.toUTCString();
-				document.cookie = 'uname=null; expires='+now;
+				document.cookie = 'uname=null; expires=' + now;
 				this.userShow = false;
 				this.uname = '';
+			},
+			doUpload() {
+				// console.log('上传文件');
+				if(document.cookie) {
+					this.ajax();
+				} else {
+					alert('请先登录')
+				}
+
+			},
+			ajax: function() {
+				var self = this;
+				console.log('执行ajax请求');
+				var fileNode = document.getElementById("file");
+				var xmlhttp = new XMLHttpRequest();
+				//设置回调，当请求的状态发生变化时，就会被调用  
+				xmlhttp.onreadystatechange = function() {
+					//上传成功，返回的文件名，设置到父节点的背景中  
+					if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+						// console.log(xmlhttp.responseText)
+						self.pic = 'uploads/' + xmlhttp.responseText;
+						self.$ajax.post('http://10.3.137.214:666/upload-touxiang', {
+							uname: self.uname
+						}, {
+
+							'headers': {
+								'Content-Type': 'application/x-www-form-urlencoded'
+							},
+
+							transformRequest: function(obj) {
+								//处理传递参数的格式
+								var str = [];
+								for(var p in obj) {
+									str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]))
+								}
+								return str.join('&')
+							}
+						}).then(function(data) {
+							// console.log(data,'数据库存储成功')
+						})
+					}
+				}
+				//构造form数据 
+				var data = new FormData();
+				console.log(fileNode.files)
+				data.append("logo", fileNode.files[0]);
+				// console.log(data)
+				//设置请求，true：表示异步  
+				xmlhttp.open("post", 'http://10.3.137.214:666/upload-single', true);
+				//不要缓存  
+				//xmlhttp.setRequestHeader("If-Modified-Since", "0");  
+				//提交请求  
+				xmlhttp.send(data);
+				//清除掉，否则下一次选择同样的文件就进入不到onchange函数中了  
+				fileNode.value = null;
+
+				/*this.$ajax.post('http://10.3.137.214:666/upload-single',{
+						cache: false, //不必须
+			            data: new FormData(document.querySelector('#uploadForm')),
+			            processData: false,
+			            contentType: false,
+			            //此法参数这一块写的方式有问题
+			            //不建议这么写，建议用原生方法
+					},{
+
+					'headers':{
+						'Content-Type':'application/x-www-form-urlencoded'
+					},
+
+					transformRequest: function(obj) { 
+						//处理传递参数的格式
+		                var str = [];
+		                for (var p in obj) {
+		                    str.push(encodeURIComponent(p)+"="+encodeURIComponent(obj[p]))
+		                }
+		                return str.join('&')
+	            	}
+					}).then(function(data){
+						console.log('请求完成');
+						console.log(data);
+						// self.pic = 'uploads/' + data.data;
+
+				})*/
+			},
+			showHeadPic() {
+				var self = this;
+				this.$ajax.post('http://10.3.137.214:666/touxiang', {
+					uname: this.uname
+				}, {
+
+					'headers': {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},
+
+					transformRequest: function(obj) {
+						//处理传递参数的格式
+						var str = [];
+						for(var p in obj) {
+							str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]))
+						}
+						return str.join('&')
+					}
+				}).then(function(data) {
+					// console.log(data.data,'----')
+					self.pic = 'uploads/' + data.data;
+				})
 			}
 		},
-		mounted:function(){
+		mounted: function() {
 			// console.log(document.cookie);
 			// 渲染用户信息
-			if(document.cookie){
+			if(document.cookie) {
 				this.userShow = true;
 				this.uname = document.cookie.slice(6);
+				this.showHeadPic();
 				console.log(this.uname);
-			}else{
+			} else {
 				this.userShow = false;
 			}
 			console.log('模板渲染mounted----')
-			
+
 		}
 
 	}

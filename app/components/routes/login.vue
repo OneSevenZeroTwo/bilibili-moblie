@@ -10,13 +10,13 @@
 				<li class="item username">
 					<div class="input-wrp"><input type="text" v-model="uname" placeholder="你的用户名" id="login-username" maxlength="50" autocomplete="off" class=""></div>
 					<div v-show="unameYZ" class="text clearfix">
-						<p class="tips">用户名错误</p>
+						<p class="tips">咦，用户名有误哦</p>
 					</div>
 				</li>
 				<li class="item password">
 					<div class="input-wrp"><input type="password" value=""v-model="password" placeholder="密码" id="login-passwd" class=""></div>
 					<div v-show="pswYZ" class="text clearfix">
-						<p class="tips">密码错误</p>
+						<p class="tips">喵，密码不对哦</p>
 						<a href="https://passport.bilibili.com/resetpwd" class="forget-password">忘记密码？</a>
 					</div>
 				</li>
@@ -55,7 +55,7 @@
 	}
 	
 	header {
-		height: 38px;
+		height: 58px;
 		line-height: 48px;
 		border: 1px solid #ddd;
 		background: #fff;

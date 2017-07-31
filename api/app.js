@@ -148,3 +148,54 @@ var server = app.listen(666, function() {
 	var port = server.address().port
 	console.log("应用实例，访问地址为 http://%s:%s", host, port)
 })
+
+
+// 上传文件----------------------------------------------------
+var multer = require('multer');
+var imgurl;
+var storage = multer.diskStorage({
+	//设置上传后文件路径，uploads文件夹不会自动创建。
+	destination: function(req, file, cb) {
+		cb(null, '../public/uploads');
+	},
+	//给上传文件重命名，获取添加后缀名
+	filename: function(req, file, cb) {
+		var fileFormat = (file.originalname).split(".");
+		//给图片加上时间戳格式防止重名名
+		//比如把 abc.jpg图片切割为数组[abc,jpg],然后用数组长度-1来获取后缀名
+		imgurl =  file.fieldname + '-' + Date.now() + "." + fileFormat[fileFormat.length - 1];
+		cb(null, imgurl);
+	}
+});
+var upload = multer({
+	storage: storage
+});
+app.post('/upload-single', upload.any(), function(req, res, next) {	
+	res.append("Access-Control-Allow-Origin","*");
+	res.send(imgurl);
+});
+
+// 头像写入数据库--------------------
+app.post('/upload-touxiang',function(req,res){
+	createConnection();
+	connection.connect();
+	var username = req.body.uname;
+	console.log(username)
+	connection.query(`update usermsg set imgurl = '${imgurl}' where username = '${username}';`, function(error, results, fields){
+		if(error) throw error;
+		res.send('ok666');
+	})
+	res.append("Access-Control-Allow-Origin", "*")
+})
+
+app.post('/touxiang',function(req,res){
+	createConnection();
+	connection.connect();
+	var username = req.body.uname;
+	connection.query(`select * from usermsg where username = '${username}';`, function(error, results, fields){
+		if(error) throw error;
+		// console.log(results[0].imgurl)
+		res.send(results[0].imgurl);
+	})
+	res.append("Access-Control-Allow-Origin", "*")
+})
