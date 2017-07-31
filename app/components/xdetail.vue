@@ -169,7 +169,7 @@
 		data(){
 			return {
 				swiperOption: {
-					width:90,
+					width:110,
 				},
 				isshowdesc:true,
 				iscollected:false,
@@ -482,6 +482,7 @@
 			display:flex;
 			padding-left:20px;
 			border-bottom:1px solid #ccc;
+		    background-color: #FFF;
 			li{
 				display:block;
 				height:50px;
@@ -641,12 +642,10 @@
 		    margin-bottom: .896rem;
 	    	.partc{
 		    	display:block;
-		    	width:25%;
 		    	height:50px;
 		    	position:relative;
 		    	float: left;
-			    width: 5.09867rem;
-			    height: 2.73067rem;
+			    width: 4.09867rem;
 			    border: .04267rem solid #fb7299;
 			    border-radius: .42667rem;
 			    margin-right: .42667rem;

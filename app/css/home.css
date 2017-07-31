@@ -386,7 +386,9 @@ input[type=button] {
 }
 
 .index__curTab__src-home-zone-tab- p {
-    width: 1.36533rem;
+
+    width: inherit;
+
     font-size: .59733rem;
     line-height: 1.28rem;
     text-align: center;
@@ -403,8 +405,10 @@ input[type=button] {
     –webkit-transform: tranzlateZ(0)
 }
 
-.index__tab__src-home-zone-tab- p {
-    width: 1.36533rem;
+
+.index__tab__src-home-zone-tab- p{
+    width: inherit;
+
     font-size: .59733rem;
     line-height: 1.28rem;
     text-align: center;
@@ -412,10 +416,17 @@ input[type=button] {
     border-bottom: .08533rem solid #fff
 }
 
+
+/*.index__curTab__src-home-zone-tab-.index__big__src-home-zone-tab->p,
+.index__tab__src-home-zone-tab-.index__big__src-home-zone-tab->p {
+    width: 1.96267rem
+}*/
+
 .index__curTab__src-home-zone-tab-.index__big__src-home-zone-tab->p,
 .index__tab__src-home-zone-tab-.index__big__src-home-zone-tab->p {
     width: 1.96267rem
 }
+
 
 .index__partBox__src-home-zoneAll- {
     position: fixed;
