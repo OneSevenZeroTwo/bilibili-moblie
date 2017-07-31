@@ -75,6 +75,7 @@
 				document.cookie = 'uname=null; expires=' + now;
 				this.userShow = false;
 				this.uname = '';
+				this.pic = '//static.hdslb.com/mobile/img/default_avatar.png';
 			},
 			doUpload() {
 				// console.log('上传文件');
@@ -179,7 +180,11 @@
 					}
 				}).then(function(data) {
 					// console.log(data.data,'----')
-					self.pic = 'uploads/' + data.data;
+					console.log(data,'--------');
+					if(data.data){
+						self.pic = 'uploads/' + data.data;
+					}
+					
 				})
 			}
 		},
