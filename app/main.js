@@ -8,7 +8,7 @@ import VueResource from 'vue-resource';
 //axios的ajax封装库
 import axios from "axios";
 //轮播图
-import VueAwesomeSwiper from 'vue-awesome-swiper'
+import VueAwesomeSwiper from 'vue-awesome-swiper';
 Vue.use(Vuex);
 //通过 Vue.use()明确地安装路由功能
 Vue.use(VueRouter);
@@ -17,7 +17,11 @@ Vue.use(VueAwesomeSwiper)
 //挂载axios在Vue构造器下
 Vue.prototype.$ajax = axios;
 //拥入weui样式库
-import "weui"
+import "weui";
+
+import $ from 'jquery';
+window.$ = $;
+window.jQuery = $;
 
 //引入样式-------------------
 
@@ -27,6 +31,7 @@ import './css/home.css';
 //引入组件
 import home from "./components/routes/home.vue";
 import detail from "./components/routes/detail.vue";
+import search from "./components/routes/search.vue";
 import Rank from "./components/routes/Rank.vue";
 import mine from "./components/routes/mine.vue";
 import login from "./components/routes/login.vue";
@@ -43,7 +48,10 @@ var router = new VueRouter({
 		},{
 			path: '/detail/:aid',
 			component: detail
-		}, {
+		},{
+			path: '/search',
+			component: search
+		},{
 			path: '/',
 			redirect: '/index'
 		},{
@@ -52,7 +60,7 @@ var router = new VueRouter({
 		},{
 			path:'/login',
 			component:login
-		},,{
+		},{
 			path:'/register',
 			component:register
 		}]

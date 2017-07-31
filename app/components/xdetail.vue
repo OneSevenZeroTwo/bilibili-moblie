@@ -12,7 +12,7 @@
 				<li>
 					<a @click="collect()">
 						<i :class="{'collect':!iscollected,'collected':iscollected}"></i>
-						收藏
+						{{iscollected?'已收藏':'收藏'}}
 					</a>
 				</li>
 				<li>
@@ -105,12 +105,13 @@
 			<div class="review_content">
 				<div class="review_list" v-for="rv in reviews">
 					<a class="rv_pic">
-						<!-- <img :src="rv.rv_pic"> -->
-						<img src="">
+						<!-- <img src=""> -->
+						<!-- <img :src="require(rv.src)"> -->
+						<img :src="rv.src">
 					</a>
-					<a class="rv_name">{{rv.rv_name}}</a>
-					<span class="rv_time">{{rv.rv_time}}</span>
-					<p class="rv_content">{{rv.rv_content}}</p>
+					<a class="rv_name">{{rv.name}}</a>
+					<span class="rv_time">{{rv.time}}</span>
+					<p class="rv_content">{{rv.content}}</p>
 				</div>
 			</div>
 			<span class="review_download">下载bilibili客户端，查看全部评论</span>
@@ -143,25 +144,26 @@
 	export default {
 		updated() {
 			console.log('更新');
-			if (this.isjump) {
-				this.page = 0;
-				this.showMsg();
-				this.isjump = false;
-				document.body.scrollTop = 0;
-				console.log('渲染成功');
-			}
+			
+			// if (this.isjump) {
+			// 	this.showMsg();
+			// 	this.isjump = false;
+			// 	document.body.scrollTop = 0;
+			// 	console.log('渲染成功');
+			// }
 		},
 		mounted() {
-			console.log('初始')
+			console.log('初始');
 			var swiper = new Swiper('.swiper-container',{
 				observer:true,//修改swiper自己或子元素时，自动初始化swiper
 				observeParents:true,//修改swiper的父元素时，自动初始化swiper
 			});
+			
 			//detail/1
 			// console.log(this.$route.params)
 			//detail/?id=1
 			// console.log(this.$route.query)
-			this.aid = this.$route.params.aid;
+			// this.aid = this.$route.params.aid;
 			this.showMsg()
 		},
 		data(){
@@ -180,6 +182,7 @@
 				author:"光之主",
 				pubdate:"1500853582",
 				author_face:"//i1.hdslb.com/bfs/face/b2963d6a16c785d80b57adef8c046aae4f927dfb.jpg",
+				// author_face:"../images/rvpic/rv1.jpg"),
 				partc:['a','b','c','d','e','f','g','h','i','j','k','l','m'],
 				tags:["型月","fate","英灵","fate grand order","fgo","fate extra","fate zero","fate全系列","fate prototype"],
 				//加载
@@ -189,31 +192,32 @@
 				isload:'刚刚看到这里，点击加载更多~',
 				isjump:false,
 				//评论
+				
 				reviews:[{
-					rv_pic:"//i1.hdslb.com/bfs/face/8d24da56f5c69f910f7484e91a04c9aff4eaedf4.jpg@80w_80h.webp",
-					rv_name:"山之翁王哈桑",
-					rv_time:"2天前",
-					rv_content:"我在贴吧里疯狂打广告贴，看看有少人会被我安利来，妈的累死我来(･∀･)",
+					src:"rvpic/rv1.jpg",
+					name:"山之翁王哈桑",
+					time:"2天前",
+					content:"我在贴吧里疯狂打广告贴，看看有少人会被我安利来，妈的累死我来(･∀･)",
 				},{
-					rv_pic:"//i2.hdslb.com/bfs/face/f5545018f891e543ba712ed3e234f02c663bc0b7.jpg@80w_80h.webp",
-					rv_name:"捷德皇家骑士",
-					rv_time:"2天前",
-					rv_content:"我还是说上几句.冠位候补不等于实力，梅林估计也只有逃跑技术还有幻术天下第一，旧剑和呆毛实力爱歌说都差不多，维纳斯尼禄的对星宝具，大碧池表示即使有对星宝具也无法摧毁星球，大王只是月球大王在地球上分身的残骸，圣剑使并没有杀死地球巨神而是继续游荡了几千年.盖提亚大光轮就是贯穿星球或者洗地，",
+					src:"rvpic/rv2.jpg",
+					name:"捷德皇家骑士",
+					time:"2天前",
+					content:"我还是说上几句.冠位候补不等于实力，梅林估计也只有逃跑技术还有幻术天下第一，旧剑和呆毛实力爱歌说都差不多，维纳斯尼禄的对星宝具，大碧池表示即使有对星宝具也无法摧毁星球，大王只是月球大王在地球上分身的残骸，圣剑使并没有杀死地球巨神而是继续游荡了几千年.盖提亚大光轮就是贯穿星球或者洗地，",
 				},{
-					rv_pic:"//i2.hdslb.com/bfs/face/52a7735ae53e064e00f30128ceb98b612ef88df1.jpg@80w_80h.webp",
-					rv_name:"菲尔葛森-里奥",
-					rv_time:"3天前",
-					rv_content:"终于等到你，还好没放弃！(´；ω；`)",
+					src:"rvpic/rv3.jpg",
+					name:"菲尔葛森-里奥",
+					time:"3天前",
+					content:"终于等到你，还好没放弃！(´；ω；`)",
 				},{
-					rv_pic:"//i2.hdslb.com/bfs/face/825c29a2da9e78fe8fd3f57c65b5d5b1e98daefd.jpg@80w_80h.webp",
-					rv_name:"灵山",
-					rv_time:"3天前",
-					rv_content:"分P有些多，大致做个导航方便查找，有特例会用括号列出欧洲1：圆桌相关欧洲2：凯尔特，英法史实、文学相关欧洲3：凯尔特，欧洲文学、航海相关欧洲4：基督教，罗马相关（结尾大帝，中间大王）欧洲5：欧洲学者，以及东欧、北欧史实传说相关（结尾海叔，中间哥伦布）欧洲6：希腊相关亚洲1：日本相关亚洲2：日本，中国相关接下来亚洲的顺序大概是从印度到西亚（？）",
+					src:"rvpic/rv4.jpg",
+					name:"灵山",
+					time:"3天前",
+					content:"分P有些多，大致做个导航方便查找，有特例会用括号列出欧洲1：圆桌相关欧洲2：凯尔特，英法史实、文学相关欧洲3：凯尔特，欧洲文学、航海相关欧洲4：基督教，罗马相关（结尾大帝，中间大王）欧洲5：欧洲学者，以及东欧、北欧史实传说相关（结尾海叔，中间哥伦布）欧洲6：希腊相关亚洲1：日本相关亚洲2：日本，中国相关接下来亚洲的顺序大概是从印度到西亚（？）",
 				},{
-					rv_pic:"//i0.hdslb.com/bfs/face/5dedbbf713c397c2477cedfe43c3d1549dc4111b.jpg@80w_80h.webp",
-					rv_name:"六界萌哥",
-					rv_time:"2天前",
-					rv_content:"不吹毛求疵，UP这个视频起码是花了大心血的，虽然有小问题但是还是很不错的特别是对于我月这种已经彻底DSSQ的东西，与其让所有人肆意脑补，不如看点设定来的实在这里是闪厨，奉劝一句所有衡量实力的：1.闪是英灵中数一数二的存在，不是最强2.吹斯卡哈的，斯卡哈一形态只有top class，最多算同级甚至会不如3.真正写和你闪持平的只有大帝赫拉克勒斯小恩等少数几人，其他的都是类比出来的，不要老是脑补迦尔纳碰闪闪怎么样，有脑洞你自己写不就好了4.楼层论是贴吧的，一楼天花板就是按照你闪来的，别轮过头了",
+					src:"rvpic/rv5.jpg",
+					name:"六界萌哥",
+					time:"2天前",
+					content:"不吹毛求疵，UP这个视频起码是花了大心血的，虽然有小问题但是还是很不错的特别是对于我月这种已经彻底DSSQ的东西，与其让所有人肆意脑补，不如看点设定来的实在这里是闪厨，奉劝一句所有衡量实力的：1.闪是英灵中数一数二的存在，不是最强2.吹斯卡哈的，斯卡哈一形态只有top class，最多算同级甚至会不如3.真正写和你闪持平的只有大帝赫拉克勒斯小恩等少数几人，其他的都是类比出来的，不要老是脑补迦尔纳碰闪闪怎么样，有脑洞你自己写不就好了4.楼层论是贴吧的，一楼天花板就是按照你闪来的，别轮过头了",
 				},]
 			}
 		},
@@ -249,20 +253,38 @@
 
 			//页面渲染
 			showMsg(){
-				// this.aid = this.$route.params.aid;
+				this.aid = this.$route.params.aid;
+				//评论
+				this.$ajax.get('http://localhost:12345/review')
+				.then((response) => {
+					// console.log(response.data)
+					this.reviews = [];
+					this.reviews = this.reviews.concat(response.data);
+					
+					// console.log(this.reviews)
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+
 				//相关视频
 				var xml = new XMLHttpRequest();
 				xml.open('GET',"https://comment.bilibili.com/recommendnew,"+this.aid,true);
 				xml.send();
 				xml.onreadystatechange = function(){
 					if (xml.readyState == 4&&(xml.status==200||xml.status==304)) {
-						var data = JSON.parse(xml.responseText).data
+						var data = JSON.parse(xml.responseText).data;
 						// console.log(data)
-						this.list = data;
+						if (data) {
+							this.list = data;
+						}else{
+							this.list = [];
+						}
 						this.loadmore();
 					}
 				}.bind(this);
-
+				
+				//数据库数据
 				try{
 
 					this.$ajax.get('http://localhost:12345/detail', {
@@ -300,27 +322,79 @@
 					console.log(err)
 				}	
 
+				this.page = 0;
 			},
 
+			//详情跳详情
 			jump(aid,title,name,view,danmaku){
 				console.log('jump');
-				this.isjump = true;
+				//静态更新
+				// this.isjump = true;
 				this.aid = aid;
 				this.title = title;
 				this.author = name;
 				this.view = view;
 				this.danmaku = danmaku;
+				//页面刷新更新
+				this.showMsg();
+				document.body.scrollTop = 0;
+				window.location.reload();
 			},
 
 			collect(){
+				var cookies = document.cookie;
+				var uname;
+				if (cookies.length>0) {
+					//拆分成数组
+					cookies = cookies.split('; ');
+					cookies.forEach(function(item){
+						var arr = item.split('=');
+						if (arr[0]==='uname') {
+							uname = arr[1];
+						}
+					})
+				}
+				if(!uname){
+					alert('请先登录');
+					location.href="#/login";
+					return
+				}
+				console.log(uname);
 				this.iscollected = !this.iscollected;
 				if(this.iscollected){
-					console.log(123);
-					this.$ajax.get()
+					console.log(123,this.aid);
+					// var aid = this.aid;
+					//加入收藏
+					this.$ajax.post('http://10.3.137.214:666/collect',{
+						username:uname,
+						msgId:this.aid
+					},{
+						'headers':{
+							'Content-Type':'application/x-www-form-urlencoded'
+						},
+						transformRequest: function(obj) { 
+							//处理传递参数的格式
+			                var str = [];
+			                for (var p in obj) {
+			                    str.push(encodeURIComponent(p)+"="+encodeURIComponent(obj[p]))
+			                }
+			                return str.join('&')
+		            	}
+					})
+					.then(function(data){
+						if(data){
+							console.log(data)
+						}
+					})
+					.catch((error) => {
+						console.log(error);
+					});
+					
 				}
 			}
 		},
 
+		//
 		filters:{
 			//浏览或弹幕数超过1w则四舍五入
 			//计算弹幕数和浏览数
@@ -355,7 +429,6 @@
 </script>
 <!--CSS-->
 <style scoped lang="scss">
-	$size: 20px;
 	
 	.showmore{
 		position: absolute;
@@ -488,7 +561,7 @@
 		    }
 	    }
 	    .showdesc{
-	    	transition: all .5s;
+	    	transition: all 0.5s;
 	    	height:.85333rem;
 	    }
 	}
