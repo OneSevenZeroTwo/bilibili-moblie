@@ -20,7 +20,7 @@
 				</div> -->
 			</a>
 			<div class="index__content__src-home-different-" >
-				<a v-for="(obj,index) in n.slice(0,limit)" class="index__item__src-commonComponent-Item-" :href="'#/detail/?aid='+obj.aid" >
+				<a v-for="(obj,index) in n.slice(0,limit)" class="index__item__src-commonComponent-Item-" :href="'#/detail/'+obj.aid" >
 					<div class="index__imgContainer__src-commonComponent-Item-"><img src="//s1.hdslb.com/bfs/static/mult/images/tv.png" class="index__tv__src-commonComponent-Item-" alt=""><img  :src="images[parseInt(Math.random()*29) + 1]" alt="" class="index__normal__src-commonComponent-Item-">
 						<div class="index__info__src-commonComponent-Item-">
 							<div class="index__playIcon__src-commonComponent-Item-">

@@ -6,7 +6,7 @@
                 <div class="nav-wrp">
                     <a href="#/index" class="logo"></a>
                     <a class="cell" href="#/mine/history"><i class="nav-icon bili-icon-history"></i></a>
-                    <a class="cell" href=""><i class="nav-icon bili-icon-search"></i></a>
+                    <a class="cell" href="#/search"><i class="nav-icon bili-icon-search"></i></a>
                 </div>
         </nav>
 		<!-- <xmine></xmine> -->

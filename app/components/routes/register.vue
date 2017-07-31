@@ -14,10 +14,10 @@
 				<div class="input-wrp">
 					<input v-model="password" type="password" name="userpwd" id="userpwd" autocomplete="off" placeholder="您的密码, 6-16个字符组成，区分大小写">
 				</div>
-				<span v-show="pswYZ" class="noticeText" id="pwd-msg">设个密码守护你吧！</span>
+				<span v-show="pswYZ" class="noticeText" id="pwd-msg">密码格式不对哦！</span>
 
 				<div class="input-wrp" style="background: #ffffff">
-					<select name="country_code" id="country_code" style="width: 100%;height: 100%">
+					<select name="country_code" id="country_code" style="width: 100%;height: 100%;border: none;">
 
 						<option value="1" code="86">中国大陆</option>
 
@@ -98,7 +98,7 @@
 	}
 	
 	header {
-		height: 38px;
+		height: 58px;
 		line-height: 48px;
 		border: 1px solid #ddd;
 		background: #fff;
