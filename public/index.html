@@ -1,47 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html data-dpr="2" max-width="540" >
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 		<title>bilibili</title>
-<<<<<<< HEAD
-		<!-- <link rel="stylesheet" href="https://s1.hdslb.com/bfs/static/mult/partition-1407103683.css"> -->
+
 		<!-- <link rel="stylesheet" href="https://s1.hdslb.com/bfs/static/mult/css/reset.css" />
 		<link rel="stylesheet" href="https://s1.hdslb.com/bfs/static/mult/home-1407103685.css" /> -->
-		<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
-=======
-		<link rel="stylesheet" href="https://s1.hdslb.com/bfs/static/mult/css/reset.css" />
-		<link rel="stylesheet" href="https://s1.hdslb.com/bfs/static/mult/home-1407103685.css" />
 	
->>>>>>> 5ee1a36fea574e905a0ea146425d8de3e3a3d4b9
+
 	</head>
 	<body>
 		<div id="demo"></div>
 	</body>
 	<script src="bundle.js"></script>
-	<!-- <script src="referrer-killer.js"></script>
-	<script>
-		document.getElementById('noreferer').innerHTML
-	</script> -->
-	<!-- <script src="video_1b67226.js"></script>
-	<script src="jquery-3.2.1.js"></script>
-	<script>
-		$video.init({
-		el: "main", //创建的父元素id
-		btncolor: "#c9c9c9", //控制按钮的颜色
-		bgcolor: "", //控制条的背景颜色
-		bgprocolor: "", //进度条显示进度颜色
-		autoplay: false, //开启自动播放，false不能自动播放
-		loopplay: true, //true自动循环播放，false不自动循环播放
-		controlsstate: {
-			playbtn: true, //播放和暂停按钮显示，false不显示
-			toggbtn: true, //下一个和上一个视频切换按钮显示，false不显示
-			processbtn: true, //播放进度条显示，false不显示
-			fullbtn: true //全屏按钮显示
-		},
-		//视频源地址支持mp4
-		src: ["http://cn-fjxm-dx-v-08.acgvideo.com/vg1/7/89/20543511-1.mp4?expires=1501067700&platform=html5&ssig=3q1o73KBBM9Jm5xyX5B2eg&oi=3683235934&nfa=lzuRTh2AZPjewgHtRiRHcw==&dynamic=1&hfa=2068535897&hfb=M2Y2ZWYwZjM2YmRiYmY5MDljYTBiOWE2ZmEwYjJmYTM="]
-	});
-	</script> -->
+	<script>  
+        (function (doc, win) {   
+            var docEl = doc.documentElement,   
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',   
+            recalc = function () {   
+            var clientWidth = docEl.clientWidth;   
+            if (!clientWidth) return;   
+            docEl.style.fontSize = 18 * (clientWidth / 320) + 'px';   
+        };   
+        if (!doc.addEventListener) return;   
+        win.addEventListener(resizeEvt, recalc, false);   
+        doc.addEventListener('DOMContentLoaded', recalc, false);   
+        })(document, window);   
+ </script>
+	
+	
 </html>

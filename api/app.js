@@ -107,14 +107,15 @@ app.post('/collect', function(req, res) {
 })
 
 
-// 收藏页---------------------------
+// 显示收藏页---------------------------
 app.post('/collectlist', function(req, res) {
 	createConnection();
 	connection.connect();
-	var username = req.body.username;
+	var username = req.body.uname;
+	console.log(username,'------------')
 	connection.query(`select msgId from usermsg where username = '${username}';`, function(error, results, fields){
 		if(error) throw error;
-		// console.log(results[0].msgId);
+		console.log(results[0].msgId,'ididididididd');
 		if(!results[0].msgId){
 			res.send('nonono');		
 		}else{			
@@ -128,12 +129,13 @@ app.post('/collectlist', function(req, res) {
 				}
 			}*/
 			var str = '('+results[0].msgId+')';
-			// console.log(str);
 			// select * from usermsg where id in (1,2,5,7,9);若有重复会自动剔除不会显示两次
-			connection.query(`select * from lagou where id in ${str};`,function(error, results, fields){
+			
+			/*connection.query(`select * from usermsg where id in ${str};`,function(error, results, fields){
 				if(error) throw error;
 				res.send(results);
-			});
+			});*/
+			res.send(results[0]);
 		}
 	})
 	res.append("Access-Control-Allow-Origin", "*")	

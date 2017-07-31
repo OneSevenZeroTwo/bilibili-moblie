@@ -17,16 +17,13 @@
 			return {
 				imgs: [{
 					id: 1,
-					src: require("../images/1.jpg")
+					src: require("../images/7.jpg")
 				}, {
 					id: 2,
-					src: require("../images/2.jpg")
+					src: require("../images/8.jpg")
 				},{
 					id: 3,
-					src: require("../images/5.jpg")
-				},{
-					id: 4,
-					src: require("../images/4.jpg")
+					src: require("../images/9.jpg")
 				}],
 				swiperOption: {
 					autoplay: 3000
@@ -40,8 +37,4 @@
 		width: 100%;
 		height: 100%;
 	}
-	.swiper-container {
-    
-        padding-top: 50px;
-}
 </style>

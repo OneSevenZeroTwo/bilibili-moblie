@@ -1,13 +1,13 @@
 <template>
-	<div style="margin-top: 58px;">
-		<div class="gridlist-demo index__different__src-home-different-" v-for="n in news">
+	<div>
+		<div class="gridlist-demo index__different__src-home-different-" v-for="n in zhibo">
 			<div class="index__title__src-home-different-">
 				<div class="index__icon1__src-home-different-">
 					<svg class="index__icon__src-home-different-" aria-hidden="true">
 						<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-zhibo"></use>
 					</svg>
 				</div>
-				<p v-for="(obj,index) in n" v-if="index==0">{{obj.tname}}</p>
+				<p>{{n.partition.name}}</p>
 			</div>
 			<a class="index__more__src-home-different-" href="javascript:void(0);" @click="loadMore()">
 				<div class="index__words__src-home-different-" >
@@ -20,8 +20,8 @@
 				</div> -->
 			</a>
 			<div class="index__content__src-home-different-" >
-				<a v-for="(obj,index) in n.slice(0,limit)" class="index__item__src-commonComponent-Item-" :href="'#/detail/'+obj.aid" >
-					<div class="index__imgContainer__src-commonComponent-Item-"><img src="//s1.hdslb.com/bfs/static/mult/images/tv.png" class="index__tv__src-commonComponent-Item-" alt=""><img  :src="images[parseInt(Math.random()*29) + 1]" alt="" class="index__normal__src-commonComponent-Item-">
+				<a v-for="(obj,index) in n.lives.slice(0,limit)" class="index__item__src-commonComponent-Item-" :href="'#/detail/'+obj.aid" >
+					<div class="index__imgContainer__src-commonComponent-Item-"><img class="index__tv__src-commonComponent-Item-" alt=""><img  :src="images[parseInt(Math.random()*29) + 1]" alt="" class="index__normal__src-commonComponent-Item-">
 						<div class="index__info__src-commonComponent-Item-">
 							<div class="index__playIcon__src-commonComponent-Item-">
 								<svg class="index__icon__src-commonComponent-Item-" aria-hidden="true">
@@ -31,7 +31,7 @@
 								</svg>
 							</div>
 							<div class="index__play__src-commonComponent-Item-" style="width: 2.7rem;">
-								<p>{{obj.stat.view|num}}</p>
+								<p>{{obj.owner.name}}</p>
 							</div>
 							<div class="index__danmuIcon__src-commonComponent-Item-">
 								<svg class="index__icon__src-commonComponent-Item-" aria-hidden="true">
@@ -41,7 +41,7 @@
 								</svg>
 							</div>
 							<div class="index__view__src-commonComponent-Item-">
-								<p>{{obj.stat.danmaku}}</p>
+								<p>{{obj.online}}</p>
 							</div>
 						</div>
 					</div>
@@ -68,8 +68,8 @@
         // search() {
         //   return this.$store.state.count
         // },
-        news() {
-          return this.$store.state.news
+        zhibo() {
+          return this.$store.state.zhibo
         },
         limit(){
         	return this.$store.state.limit
@@ -80,7 +80,7 @@
       },
       methods: {
         load() {
-          this.$store.dispatch("setNews")
+          this.$store.dispatch("setzhibo")
         },
         loadMore(){
         	this.$store.state.limit=10
@@ -154,7 +154,13 @@
 .mu-grid-tile-title {
     font-size: 14px;
 } */
-/*.index__different__src-home-different- {
+
+.room-list-container{
+	    padding: 0 .333333333333333rem;
+    margin-bottom: .32rem;
+    background-color: #fff;
+}
+.index__different__src-home-different- {
     position: relative;
     width: 100%;
     margin-top: 10px;
@@ -207,5 +213,5 @@
     letter-spacing: 0;
     line-height: 14px;
     text-align: left;
-}*/
+}
 </style>

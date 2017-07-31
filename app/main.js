@@ -141,6 +141,7 @@ var router = new VueRouter({
 		},{
 			path: '/Rank',
 			redirect: '/Rank/0'
+		},{
 			path:'/mine',
 			component:mine,
 			children:[{
@@ -221,7 +222,7 @@ var store = new Vuex.Store({
 				"../app/images/29.png",
 				"../app/images/30.png",]
 
-		Img: ["//s1.hdslb.com/bfs/static/mult/images/rank1.png", "//s1.hdslb.com/bfs/static/mult/images/rank2.png", "//s1.hdslb.com/bfs/static/mult/images/rank3.png"]
+		
 	},
 	getters: {
 		getCount(state) {
@@ -239,24 +240,15 @@ var store = new Vuex.Store({
 			state.title = data
 		},
 		setRank(state) {
-			console.log(Vue)
 			Vue.http.jsonp("http://api.bilibili.com/x/web-interface/ranking?day=3&jsonp=jsonp", {
 				params: {
 					rid:state.rout,
 				}
 			}).then((data) => {
-				console.log(state.Ranks)
+				console.log(state.isloading)
 				state.isloading=true,
 				state.Ranks = state.Ranks.concat(data.data.data.list),
 				state.images=state.images.concat(data.data.data.list.pic)
-			Vue.http.jsonp("http://api.bilibili.com/x/web-interface/ranking?rid=0&day=3&jsonp=jsonp", {
-//				params: {
-//					page: state.page++,
-//					limit: 10
-//				}
-			}).then((data) => {
-				console.log(state.Ranks)
-				state.Ranks = state.Ranks.concat(data.data.data.list)
 				console.log(state.Ranks)
 			}, (err) => {
 
@@ -275,11 +267,7 @@ var store = new Vuex.Store({
 			});
 		},
 		setchannel(state){
-			Vue.http.jsonp('http://api.bilibili.com/x/web-interface/dynamic/index?jsonp=jsonp',{
-				// params: {
-				// 	page: state.page++,
-				// 	limit: 4
-				// }
+			Vue.http.jsonp('http://api.bilibili.com/x/web-interface/dynamic/index?jsonp=jsonp',{		
 			})
 			.then((data1) => {
 				console.log(data1.data.data)
@@ -304,18 +292,17 @@ var store = new Vuex.Store({
 		},
 		setchannel(context, data) {
 			context.commit('setchannel')
+		},
+		setRank(context, data) {
+			context.commit('setRank')
 		}
-
-			setRank(context, data) {
-				context.commit('setRank')
-			}
 	}
 })
 
 new Vue({
 	el: "#demo",
 	template: `
-		<router-view></router-view>
+		<router-view class="index__home__src-home-"></router-view>
 	`,
 	router,
 	store,

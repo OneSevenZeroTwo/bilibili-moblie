@@ -23,7 +23,7 @@
 		</div>
 	</a>
 	<div class="index__content__src-home-recommend-" data-reactid="123">
-		<a v-for="n in Ranks.slice(0,limit)" class="index__item__src-commonComponent-Item-" :href="'#/detail/?aid='+n.aid"  data-reactid="124">
+		<a v-for="n in Ranks.slice(0,limit)" class="index__item__src-commonComponent-Item-" :href="'#/detail/'+n.aid"  data-reactid="124">
 			<div class="index__imgContainer__src-commonComponent-Item-" data-reactid="125"><img src="//s1.hdslb.com/bfs/static/mult/images/tv.png" class="index__tv__src-commonComponent-Item-" alt="" data-reactid="126"><img :src="images[parseInt(Math.random()*29) + 1]" alt="" class="index__normal__src-commonComponent-Item-" data-reactid="127">
 				<div class="index__info__src-commonComponent-Item-" data-reactid="128">
 					<div class="index__playIcon__src-commonComponent-Item-" data-reactid="129">
