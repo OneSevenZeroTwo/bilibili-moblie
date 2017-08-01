@@ -392,8 +392,8 @@ input[type=button] {
     font-size: .59733rem;
     line-height: 1.28rem;
     text-align: center;
-    color: #fb7299;
-    border-bottom: .08533rem solid #fb7299
+    /*color: #fb7299;
+    border-bottom: .08533rem solid #fb7299*/
 }
 
 .index__tab__src-home-zone-tab- {

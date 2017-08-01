@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!--HTML-->
 <template>
 	<div>
@@ -18,7 +17,7 @@
 				大家都在搜
 				<i :class="{'showmore':!isshowmore,'showless':isshowmore}" @click="showmore()"></i>
 			</p>
-			<div class="searchtabs" :style="{'height':isshowmore?'':'5.92533rem'}">
+			<div class="searchtabs" :style="{'height':isshowmore?'':'5.12533rem'}">
 				<div v-for="tab in searchtabs">
 					<p>{{tab}}</p>
 				</div>
@@ -41,8 +40,7 @@
 			</div>
 		</div>
 		<div class="searchlist" v-show="isshowlist">
-		 <!-- :href="'#/detail/'+li.aid" -->
-			<a v-for="li in searchlist" @click="sethistory(li.title)">
+			<a v-for="li in searchlist" @click="sethistory(li.title)" :href="'#/detail/'+li.aid">
 				<!-- <p>{{li.title|hightlight}}</p> -->
 				<!-- <p>{{highlight(li.title)}}</p> -->
 				<p>{{li.title}}</p>
@@ -57,6 +55,11 @@
 <!--JS-->
 <script>
 	export default {
+		mounted(){
+			var history = this.$store.state.searchhistory;
+			this.searchlist.concat(history);
+			console.log(this.searchlist);
+		},
 		data(){
 			return {
 				searchtabs:["王者荣耀","吃货木下","极限挑战","暴走大事件","全职高手","中国有嘻哈","大司马","国产","型月","fate","英灵","fgo","fate extra","fate zero","fate全系列"],
@@ -85,13 +88,15 @@
 				this.searchc = '';
 				this.page = 1;
 				this.searchlist = [];
+				console.log('清除列表');
 			},
 			//搜索
 			search(){
 				console.log('搜索中');
+				this.page = 1;
 				var self = this;
-				var searchcon = self.searchc
-				var page = self.listpage
+				var searchcon = this.searchc
+				var page = this.listpage
 				this.$ajax.get('http://localhost:12345/search',{
 					params:{
 						target:searchcon,
@@ -120,7 +125,8 @@
 			//记录搜索历史
 			sethistory(a){
 				console.log(a)
-				this.searchhistory.push(a)
+				this.searchhistory.push(a);
+				this.$store.state.searchhistory.push(a);
 			},
 			highlight(input){
 				var a = this.searchc;
@@ -162,7 +168,7 @@
 	    width: 93.33%;
 	    top: 0;
 	    left: 0;
-	    height: 1.87733rem;
+	    height: 2.37733rem;
 	    padding: 0 3.33%;
 	    background-color: #fff;
 	    z-index: 10;
@@ -170,7 +176,7 @@
 	    	position: relative;
 		    width: 88.29%;
 		    height: 1.68rem;
-		    margin-top: .29867rem;
+		    margin-top: .39867rem;
 		    float: left;
 		    .searchlogo{
 		    	position: absolute;
@@ -209,8 +215,8 @@
     	    position: relative;
     	    display:block;
 		    float: right;
-		    width: 2.28rem;
-		    margin-top: .84rem;
+		    width: 1.78rem;
+		    margin-top: .94rem;
 		    p{
 	    	    text-align: right;
 			    color: #fb7299;
@@ -223,20 +229,21 @@
 		position: relative;
 		margin-top: 2.89867rem;
 		z-index: 0;
-		margin-left: .53333rem;
-		margin-right: .14933rem;
+		padding-left: .53333rem;
+		padding-right: .14933rem;
+		background-color:#FFF;
 		p{
 		    position: relative;
 		    color: #999;
-		    line-height: .79733rem;
-		    font-size: .79733rem;
+		    line-height: .59733rem;
+		    font-size: .59733rem;
 		    text-align: left;
 		}
 		.searchtabs{
 		    position: relative;
 		    width: 100%;
 		    margin-top: .67067rem;
-		    margin-bottom: .68267rem;
+		    padding-bottom: .68267rem;
 		    overflow: hidden;
 		    transition: all 0.5s;
 		    div{
@@ -259,8 +266,8 @@
 	}
 	.history{
 	    position: relative;
-	    margin-top: 1.10933rem;
 	    border-top: .42667rem solid #f4f4f4;
+	    background-color:#FFF;
 	    .his_title{
     	    position: relative;
     		margin-left: .53333rem;
@@ -307,7 +314,7 @@
 	    	p{
 	    		text-align: center;
 			    color: #999;
-			    font-size: 0.89733rem;
+			    font-size: 0.69733rem;
     			line-height: 2.96267rem;
 	    	}
 	    }
@@ -359,17 +366,11 @@
 		}
 		.loadmore{
 		    width: 90%;
-		    height: 2.37733rem;
+		    height: 1.37733rem;
 		    text-align: center;
-		    line-height: 2.37733rem;
-		    margin: auto;
+		    line-height: 1.37733rem;
+		    margin: 10px auto;
 		    border: 1px solid #ccc;
-		    margin-top: 10px;
 		}
 	}
 </style>
-=======
-<template>
-	<div id="page"><div data-reactroot="" data-reactid="1" data-react-checksum="746042494"><div class="index__topArea__src-search-TopArea-" data-reactid="2"><div class="index__searchBox__src-search-TopArea-searchBox-" data-reactid="3"><i class="index__searchIcon__src-search-TopArea-searchBox-" data-reactid="4"></i><input type="search" id="search" maxlength="33" autocomplete="off" placeholder="搜索视频、番剧、UP主或AV号" value="" data-reactid="5"></div><div class="index__cancelBtn__src-search-TopArea-" data-reactid="6"><p data-reactid="7">取消</p></div></div><div class="index__recommend__src-search-recommendWords-" data-reactid="8"><p class="index__subtitle__src-search-recommendWords-" data-reactid="9">大家都在搜</p><div class="index__items__src-search-recommendWords-" data-reactid="10"><div class="index__hotword__src-search-recommendWords-hotword-"><p>逐月之月</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>王者荣耀</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>fgo</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>吃货木下</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>BILIBILI正版</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>碧蓝航线</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>楚乔传</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>吻戏</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>国产</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>snh48</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>双世宠妃</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>木鱼水心</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>极限挑战</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>暴走大事件</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>kinki kids</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>全职高手</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>守望先锋</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>中国有嘻哈</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>大司马</p></div><div class="index__hotword__src-search-recommendWords-hotword-"><p>嗨氏</p></div></div></div><div class="index__history__src-search-history-" data-reactid="11"><div class="index__title__src-search-history-" data-reactid="12"><p data-reactid="13">历史搜索</p></div></div></div></div>
-</template>
->>>>>>> 6da878a5c94c54581ec782e8b3da6ef14979fdff

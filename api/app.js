@@ -10,7 +10,7 @@ function createConnection(){
 		host:'localhost',
 		user:'root',
 		password:'',
-		database:'bilibili'
+		database:'test'
 	})
 }
 
@@ -84,7 +84,7 @@ app.post('/collect', function(req, res) {
 	createConnection();
 	connection.connect();
 	var msgId = req.body.msgId;
-	var username = req.body.username;
+	var username = req.body.uname;
 	console.log(msgId,username,688888888)
 	connection.query(`select msgId from usermsg where username = '${username}';`, function(error, results, fields){
 		if(error) throw error;
@@ -194,6 +194,7 @@ app.post('/touxiang',function(req,res){
 	var username = req.body.uname;
 	connection.query(`select * from usermsg where username = '${username}';`, function(error, results, fields){
 		if(error) throw error;
+		console.log(results,'-------')
 		// console.log(results[0].imgurl)
 		res.send(results[0].imgurl);
 	})

@@ -356,7 +356,7 @@
 					fullbtn: true //全屏按钮显示
 				},
 				//视频源地址支持mp4
-				src: ["http://tx.acgvideo.com/e/21/20914214-1.mp4?txTime=1501502074&platform=html5&txSecret=1288c418db6655ea0f4a95b90b577002&oi=2746321751&rate=65000&hfb=3f6ef0f36bdbbf909ca0b9a6fa0b2fa3"]
+				src: ["mp4/123.mp4"]
 
 			});
 		},
@@ -390,6 +390,7 @@
 		height: 200px;
 	    border-bottom: 1px solid #ccc;
 		background-color:#000;
+		padding-top:40px;
 	}
 
 </style>

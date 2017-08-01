@@ -34,7 +34,6 @@
 			</div>
 			<a v-show="userShow" @click="logout()" class="account-btn">退出登录</a>
 		</div>
-
 	</div>
 </template>
 <style>
@@ -54,7 +53,6 @@
 		opacity: 0;
 	}
 </style>
-
 <script>
 	// import qq from '../images/qq.jpg';
 	export default {
@@ -64,7 +62,6 @@
 				uname: '',
 				headPic: true,
 				pic: '//static.hdslb.com/mobile/img/default_avatar.png',
-				// pic:'uploads/qq.jpg'
 			}
 		},
 		methods: {
@@ -84,7 +81,6 @@
 				} else {
 					alert('请先登录')
 				}
-
 			},
 			ajax: function() {
 				var self = this;
@@ -97,14 +93,12 @@
 					if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 						// console.log(xmlhttp.responseText)
 						self.pic = 'uploads/' + xmlhttp.responseText;
-						self.$ajax.post('http://10.3.137.214:666/upload-touxiang', {
+						self.$ajax.post('http://localhost:666/upload-touxiang', {
 							uname: self.uname
 						}, {
-
 							'headers': {
 								'Content-Type': 'application/x-www-form-urlencoded'
 							},
-
 							transformRequest: function(obj) {
 								//处理传递参数的格式
 								var str = [];
@@ -124,52 +118,22 @@
 				data.append("logo", fileNode.files[0]);
 				// console.log(data)
 				//设置请求，true：表示异步  
-				xmlhttp.open("post", 'http://10.3.137.214:666/upload-single', true);
+				xmlhttp.open("post", 'http://localhost:666/upload-single', true);
 				//不要缓存  
 				//xmlhttp.setRequestHeader("If-Modified-Since", "0");  
 				//提交请求  
 				xmlhttp.send(data);
 				//清除掉，否则下一次选择同样的文件就进入不到onchange函数中了  
 				fileNode.value = null;
-
-				/*this.$ajax.post('http://10.3.137.214:666/upload-single',{
-						cache: false, //不必须
-			            data: new FormData(document.querySelector('#uploadForm')),
-			            processData: false,
-			            contentType: false,
-			            //此法参数这一块写的方式有问题
-			            //不建议这么写，建议用原生方法
-					},{
-
-					'headers':{
-						'Content-Type':'application/x-www-form-urlencoded'
-					},
-
-					transformRequest: function(obj) { 
-						//处理传递参数的格式
-		                var str = [];
-		                for (var p in obj) {
-		                    str.push(encodeURIComponent(p)+"="+encodeURIComponent(obj[p]))
-		                }
-		                return str.join('&')
-	            	}
-					}).then(function(data){
-						console.log('请求完成');
-						console.log(data);
-						// self.pic = 'uploads/' + data.data;
-
-				})*/
 			},
 			showHeadPic() {
 				var self = this;
-				this.$ajax.post('http://10.3.137.214:666/touxiang', {
+				this.$ajax.post('http://localhost:666/touxiang', {
 					uname: this.uname
 				}, {
-
 					'headers': {
 						'Content-Type': 'application/x-www-form-urlencoded'
 					},
-
 					transformRequest: function(obj) {
 						//处理传递参数的格式
 						var str = [];
@@ -183,8 +147,7 @@
 					console.log(data,'--------');
 					if(data.data){
 						self.pic = 'uploads/' + data.data;
-					}
-					
+					}			
 				})
 			}
 		},
@@ -193,14 +156,29 @@
 			// 渲染用户信息
 			if(document.cookie) {
 				this.userShow = true;
-				this.uname = document.cookie.slice(6);
+//---------------------------------
+				var cookies = document.cookie;
+				var uname;
+				if (cookies.length>0) {
+					//拆分成数组
+					cookies = cookies.split('; ');
+					cookies.forEach(function(item){
+						var arr = item.split('=');
+						if (arr[0]==='uname') {
+							uname = arr[1];
+						}
+					})
+				}
+
+				this.uname = uname;
+
+				// this.uname = document.cookie.slice(-3);
 				this.showHeadPic();
 				console.log(this.uname);
 			} else {
 				this.userShow = false;
 			}
 			console.log('模板渲染mounted----')
-
 		}
 
 	}

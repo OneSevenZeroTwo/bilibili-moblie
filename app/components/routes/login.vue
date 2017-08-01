@@ -55,7 +55,7 @@
 	}
 	
 	header {
-		height: 58px;
+		height: 25px;
 		line-height: 48px;
 		border: 1px solid #ddd;
 		background: #fff;
@@ -74,12 +74,13 @@
 	}
 	
 	.logoText {
-		height: 42px;
-		border-left: 2px solid #de698c;
-		color: #de698c;
-		font-weight: 700;
-		padding: 17px 0 0 15px;
-		font-size: 1.3em;
+	    height: 43px;
+	    border-left: 2px solid #de698c;
+	    color: #de698c;
+	    font-weight: 700;
+	    padding: 17px 0 0 15px;
+	    font-size: 1.3em;
+	    line-height: 50px;
 	}
 	
 	a {
@@ -179,6 +180,7 @@
 		text-align: center;
 		line-height: 30px;
 		background: #f5f5f5;
+		font-size: 15px;
 	}
 	.form .tips{
 		color: #de698c;
@@ -224,7 +226,7 @@
 			ajax:function(){
 				var self = this;
 				// this.$ajax.post('http://localhost:666/login',{
-				this.$ajax.post('http://10.3.137.214:666/login',{
+				this.$ajax.post('http://localhost:666/login',{
 						uname:this.uname,
 						password:this.password
 					},{

@@ -1,5 +1,5 @@
 <template>
-	<div class="index__toTop__src-home-" id="toTop" data-reactid="1329" style="display: block;">
+	<div class="index__toTop__src-home-" id="toTop" data-reactid="1329" style="display: none;">
 		<img src="//s1.hdslb.com/bfs/static/mult/images/toTop1.png" alt="" data-reactid="1330">
 	</div>
 </template>

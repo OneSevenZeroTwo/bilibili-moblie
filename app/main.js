@@ -191,6 +191,7 @@ var store = new Vuex.Store({
 		rout:"",
 		isloading:true,
 		list:20,
+		searchhistory:[],
 		nav:[{nav:"全站",rid:0},{nav:"动画",rid:1},{nav:"番剧",rid:33},{nav:"国创",rid:167},{nav:"电影",rid:23},
 		{nav:"电视剧",rid:11},{nav:"音乐",rid:3},{nav:"舞蹈",rid:129},{nav:"游戏",rid:4},{nav:"科技",rid:36},
 		{nav:"生活",rid:160},{nav:"鬼畜",rid:119},{nav:"时尚",rid:155},{nav:"娱乐",rid:81}],

@@ -1,7 +1,7 @@
 <template>
 	<div class="index__topArea__src-home-topArea-" data-reactid="2">
 		<a class="index__logo__src-home-topArea-" href="#/index" data-reactid="3"><img src="../images/logo.png" data-reactid="4"></a>
-		<a class="index__searchIcon__src-home-topArea-" href="//m.bilibili.com/search.html" data-reactid="5">
+		<a class="index__searchIcon__src-home-topArea-" href="#/search" data-reactid="5">
 			<svg class="index__icon__src-home-topArea-" aria-hidden="true" data-reactid="6">
 				<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-sousuo" data-reactid="7">
 					<svg id="icon-sousuo" viewBox="0 0 1024 1024" width="100%" height="100%"><path d="M448 128c176 0 320 144 320 320 0 73.6-25.6 147.2-73.6 204.8l-19.2 22.4-22.4 19.2C595.2 742.4 521.6 768 448 768 272 768 128 624 128 448S272 128 448 128m0-64C236.8 64 64 236.8 64 448s172.8 384 384 384c92.8 0 179.2-35.2 246.4-89.6l211.2 208c6.4 6.4 12.8 9.6 22.4 9.6s16-3.2 22.4-9.6c12.8-16 12.8-35.2 0-48l-208-208c54.4-67.2 89.6-153.6 89.6-246.4 0-211.2-172.8-384-384-384z"></path></svg>

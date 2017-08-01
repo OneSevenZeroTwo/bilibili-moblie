@@ -74,7 +74,8 @@ export default {
     
 }
 .index__partBox__src-home-zone-{
-	top:1rem;
+	    top: 34px;
+
 }
 .index__tab__src-home-zone-tab- p{
 	width: inherit;

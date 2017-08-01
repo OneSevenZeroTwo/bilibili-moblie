@@ -32,7 +32,7 @@
 						</svg>
 					</div>
 					<div class="index__play__src-commonComponent-Item-" data-reactid="132">
-						<p data-reactid="133">{{n.play}}</p>
+						<p data-reactid="133">{{n.play|num}}</p>
 					</div>
 					<div class="index__danmuIcon__src-commonComponent-Item-" data-reactid="134">
 						<svg class="index__icon__src-commonComponent-Item-" aria-hidden="true" data-reactid="135">
@@ -151,6 +151,14 @@
         time(input) {
           console.log(input)
           return input
+        },
+        num(input){
+          if(input<10000){
+            return input;
+          }else if(input>10000){
+            var n= Math.round((input/10000) * 10) / 10+"万";
+            return n
+          }
         }
       },
       components: {

@@ -218,7 +218,7 @@
 				var self = this;
 				var uname = document.cookie.slice(6);
 				console.log(uname, '91----');
-				this.$ajax.post('http://10.3.137.214:666/collectlist', {
+				this.$ajax.post('http://localhost:666/collectlist', {
 					uname: uname
 				}, {
 					'headers': {

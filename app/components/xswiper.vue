@@ -42,6 +42,6 @@
 	}
 	.swiper-container {
     
-        padding-top: 50px;
+    padding-top: 68px;
 }
 </style>

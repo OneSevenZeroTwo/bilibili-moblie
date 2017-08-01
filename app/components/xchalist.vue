@@ -41,7 +41,7 @@
   .index__latest__src-partition-latest- {
     position: relative;
     width: 100%;
-    padding-top: 60px;
+    padding-top: 72px;
 }
 .index__latest__src-partition-latest- .index__title__src-partition-latest- {
     position: relative;

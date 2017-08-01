@@ -49,8 +49,7 @@
 		</div>
 		<div class="author">
 			<a href="" class="author_face">
-				<img src="">
-				<!-- <img :src="author_face"> -->
+				<img :src="author_face">
 			</a>
 			<a href="" class="author_name">{{author}}</a>
 			<span>{{pubdate|showtime}}前投递</span>
@@ -83,7 +82,7 @@
 					<a v-for="li in visiblelist" :href="'#/detail/'+li.aid" @click="jump(li.aid,li.title,li.owner.name,li.stat.view,li.stat.danmaku)">
 						<span class="list_pic">
 							<!-- <img :src="li.pic"> -->
-							<img src="">
+							<img :src="images[parseInt(Math.random()*29) + 1]">
 						</span>
 						<div class="list_content">
 							<span class="list_title">{{li.title}}</span>
@@ -164,7 +163,12 @@
 			//detail/?id=1
 			// console.log(this.$route.query)
 			// this.aid = this.$route.params.aid;
-			this.showMsg()
+			this.showMsg();
+		},
+		computed: {
+			images() {
+				return this.$store.state.images
+			},
 		},
 		data(){
 			return {
@@ -181,7 +185,7 @@
 				tname:"综合",
 				author:"光之主",
 				pubdate:"1500853582",
-				author_face:"//i1.hdslb.com/bfs/face/b2963d6a16c785d80b57adef8c046aae4f927dfb.jpg",
+				author_face:"rvpic/rv15.jpg",
 				// author_face:"../images/rvpic/rv1.jpg"),
 				partc:['a','b','c','d','e','f','g','h','i','j','k','l','m'],
 				tags:["型月","fate","英灵","fate grand order","fgo","fate extra","fate zero","fate全系列","fate prototype"],
@@ -192,7 +196,7 @@
 				isload:'刚刚看到这里，点击加载更多~',
 				isjump:false,
 				//评论
-				
+				videopic:[],
 				reviews:[{
 					src:"rvpic/rv1.jpg",
 					name:"山之翁王哈桑",
@@ -304,7 +308,9 @@
 							this.danmaku = JSON.parse(data.stat).danmaku;
 							this.tname = data.tname;
 							this.author = JSON.parse(data.owner).name;
-							this.author_face = JSON.parse(data.owner).face;
+							var num = parseInt(Math.random()*14)+1
+							this.author_face = `rvpic/rv${num}.jpg`;
+							// this.author_face = JSON.parse(data.owner).face;
 							//计算投递时间 改为过滤器计算
 							// var pd = data.pubdate;
 							// var nd = new Date().getTime()/1000;
@@ -365,7 +371,7 @@
 					console.log(123,this.aid);
 					// var aid = this.aid;
 					//加入收藏
-					this.$ajax.post('http://10.3.137.214:666/collect',{
+					this.$ajax.post('http://localhost:666/collect',{
 						username:uname,
 						msgId:this.aid
 					},{
@@ -462,7 +468,7 @@
 		height:20px;
 		position: absolute;
 	    top: 16px;
-	    left: 16px;
+	    left: 5px;
         background-image: url(//static.hdslb.com/images/base/anim-collect.png);
   	    background-position: -20px -20px;
 	}
@@ -472,7 +478,7 @@
 		height:20px;
 		position: absolute;
 	    top: 16px;
-	    left: 16px;
+	    left: 5px;
         background-image: url(//static.hdslb.com/images/base/anim-collect.png);
   	    background-position: -20px -140px;
 	}
@@ -502,7 +508,7 @@
 						height:20px;
 						position: absolute;
 					    top: 16px;
-					    left: 16px;
+					    left: 12px;
 					}
 				}
 			}

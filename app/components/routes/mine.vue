@@ -6,7 +6,6 @@
                 <div class="nav-wrp">
                     <a href="#/index" class="logo"></a>
                     <a class="cell" href="#/mine/history"><i class="nav-icon bili-icon-history"></i></a>
-                    <a class="cell" href=""><i class="nav-icon bili-icon-search"></i></a>
                     <a class="cell" href="#/search"><i class="nav-icon bili-icon-search"></i></a>
                 </div>
         </nav>
@@ -22,7 +21,7 @@
 						<a href="#/channel" title="频道">频道</a>
 					</li>
 					<li class="nav-item nav-live">
-						<a href="//live.bilibili.com/h5/" title="直播">直播</a>
+						<a href="http://localhost/project3/6.20/bilibili-live/public/#/index" title="直播">直播</a>
 					</li>
 					<li class="nav-item nav-rank">
 						<a href="#/Rank" title="排行">排行</a>
